@@ -41,12 +41,6 @@ const AdminSlider = (selectedKey, openKeys) => {
             </Link>
           </Menu.Item>
           <Menu.Item>
-            <Link to={'/markingschemes'}>
-              <FileDoneOutlined />
-              <span>Marking Scheme</span>
-            </Link>
-          </Menu.Item>
-          <Menu.Item>
             <PieChartOutlined />
             <span>Option 3</span>
           </Menu.Item>
