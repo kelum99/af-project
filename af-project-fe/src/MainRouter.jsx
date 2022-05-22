@@ -8,12 +8,14 @@ import TopicEvaluation from './pages/staff/topicEvaluation';
 import MarkingSchema from './pages/Admin/markingSchema';
 import StaffManagement from './pages/Admin/staffManagment';
 import Resources from './pages/Admin/Resources';
+import TopicRegister from './pages/Students/topicRegister';
+
+
 const MainRouter = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/usermanagement" element={<UserManagement />} />
         <Route path="/staffreg" element={<StaffReg />} />
         <Route path="/accepttopic" element={<Accepettopics />} />
         <Route path="/studentmanagement" element={<StudentManagement />} />
@@ -21,6 +23,8 @@ const MainRouter = () => {
         <Route path="/markingschema" element={<MarkingSchema />} />
         <Route path="/staffmanagement" element={<StaffManagement />} />
         <Route path="/resources" element={<Resources />} />
+        <Route path="/topicregister" element={<TopicRegister />} />
+        
       </Routes>
     </>
   );
