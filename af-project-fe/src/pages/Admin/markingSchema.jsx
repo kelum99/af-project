@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MainLayout from '../../components/MainLayout';
 import { Table, Space, Button, Popconfirm, Form, Input } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import './AdminStyles.css';
+import Modal from 'antd/lib/modal/Modal';
 
 const data = [
   {
@@ -26,6 +27,22 @@ const data = [
 ];
 
 const MarkingSchema = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+    setIsEdit(false);
+  };
+
   const columns = [
     {
       title: 'Name',
@@ -47,7 +64,13 @@ const MarkingSchema = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <Button icon={<EditOutlined />} />
+          <Button
+            icon={<EditOutlined />}
+            onClick={() => {
+              setIsEdit(true);
+              showModal();
+            }}
+          />
           <Popconfirm placement="right" title={msg} okText="Yes" cancelText="No">
             <Button icon={<DeleteOutlined />} />
           </Popconfirm>
@@ -58,12 +81,16 @@ const MarkingSchema = () => {
   const msg = 'Are you sure you want to delete user?';
   return (
     <MainLayout title={'Marking Schema'}>
-      <div className="form-container">
-        <h3>Marking Schema Form</h3>
+      <Modal
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        width={800}
+        title={isEdit ? 'Edit Marking Schema' : 'Add Marking Schema'}
+        footer={null}>
         <Form
           name="basic"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
+          labelCol={{ span: 6 }}
+          wrapperCol={{ span: 20 }}
           autoComplete="off"
           style={{ width: '80%' }}>
           <Form.Item
@@ -80,18 +107,23 @@ const MarkingSchema = () => {
             <Input.TextArea />
           </Form.Item>
 
-          <Form.Item label="Created By" name="createdby">
-            <Input />
-          </Form.Item>
+          {!isEdit && (
+            <Form.Item label="Created By" name="createdby">
+              <Input />
+            </Form.Item>
+          )}
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit">
-              Create
+              {isEdit ? 'Update' : 'Create'}
             </Button>
           </Form.Item>
         </Form>
-      </div>
+      </Modal>
       <div>
+        <Button type="primary" onClick={showModal} style={{ marginBottom: 20 }}>
+          Add Marking Schema
+        </Button>
         <Table columns={columns} dataSource={data} />
       </div>
     </MainLayout>
