@@ -15,6 +15,12 @@ mongoose.connect(process.env.DB_CONNECT, (err) => {
   }
 });
 
+const topicRouters = require("./src/Routes/topic.routes");
+app.use("/api/topic", topicRouters);
+
+const staffRouters = require("./src/Routes/staff.routes");
+app.use("/api/staff", staffRouters);
+
 app.listen(4000, (err) => {
   if (!err) {
     console.log("successfully connected to the port ", 4000);

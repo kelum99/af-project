@@ -10,7 +10,7 @@ const topicSchema = new mongoose.Schema({
     required: true,
   },
   registernumbers: {
-    type: Number,
+    type: [{type:String}],
     required: true,
   },
  
