@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
@@ -6,6 +7,7 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 mongoose.connect(process.env.DB_CONNECT, (err) => {
   if (err) {
@@ -15,11 +17,16 @@ mongoose.connect(process.env.DB_CONNECT, (err) => {
   }
 });
 
+
 const topicRouters = require("./src/Routes/topic.routes");
 app.use("/api/topic", topicRouters);
 
 const staffRouters = require("./src/Routes/staff.routes");
 app.use("/api/staff", staffRouters);
+
+const MarkingSchemaRoute = require("./src/Routes/markingSchema.routes");
+app.use("/api/markingschema", MarkingSchemaRoute);
+
 
 app.listen(4000, (err) => {
   if (!err) {
