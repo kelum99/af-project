@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MainLayout from '../../components/MainLayout';
 import { Table, Space, Button, Popconfirm } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import StudentUpdateModal from './studentUpdateModal';
 
 const data = [
   {
@@ -25,6 +26,15 @@ const data = [
 ];
 
 const StudentManagement = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
   const columns = [
     {
       title: 'Name',
@@ -46,7 +56,12 @@ const StudentManagement = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <Button icon={<EditOutlined />} />
+          <Button
+            icon={<EditOutlined />}
+            onClick={() => {
+              showModal();
+            }}
+          />
           <Popconfirm placement="right" title={msg} okText="Yes" cancelText="No">
             <Button icon={<DeleteOutlined />} />
           </Popconfirm>
@@ -60,6 +75,7 @@ const StudentManagement = () => {
       <div>
         <Table columns={columns} dataSource={data} />
       </div>
+      <StudentUpdateModal visible={isModalVisible} onCancel={handleCancel} />
     </MainLayout>
   );
 };

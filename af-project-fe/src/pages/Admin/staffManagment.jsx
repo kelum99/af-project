@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MainLayout from '../../components/MainLayout';
-import { Table, Space, Button, Popconfirm } from 'antd';
+import { Table, Space, Button, Popconfirm, Select, Modal } from 'antd';
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import StaffUpdateModal from './staffUpdateModal';
 
 const data = [
   {
@@ -25,16 +26,39 @@ const data = [
 ];
 
 const StaffManagement = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisible1, setIsModalVisible1] = useState(false);
+
+  const { Option } = Select;
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   const columns = [
     {
-      title: 'Name',
+      title: 'Staff Id',
+      dataIndex: 'staffId',
+      key: 'staffId'
+    },
+    {
+      title: 'Full Name',
       dataIndex: 'name',
       key: 'name'
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age'
+      title: 'E-mail',
+      dataIndex: 'email',
+      key: 'email'
+    },
+    {
+      title: 'Mobile',
+      dataIndex: 'mobile',
+      key: 'mobile'
     },
     {
       title: 'Address',
@@ -42,15 +66,30 @@ const StaffManagement = () => {
       key: 'address'
     },
     {
+      title: 'Gender',
+      dataIndex: 'gender',
+      key: 'gender'
+    },
+    {
+      title: 'Role',
+      dataIndex: 'role',
+      key: 'role'
+    },
+    {
       title: 'Action',
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <Button icon={<EditOutlined />} />
+          <Button
+            icon={<EditOutlined />}
+            onClick={() => {
+              showModal();
+            }}
+          />
           <Popconfirm placement="right" title={msg} okText="Yes" cancelText="No">
             <Button icon={<DeleteOutlined />} />
           </Popconfirm>
-          <Button icon={<PlusOutlined />} />
+          <Button icon={<PlusOutlined />} onClick={() => setIsModalVisible1(true)} />
         </Space>
       )
     }
@@ -61,6 +100,17 @@ const StaffManagement = () => {
       <div>
         <Table columns={columns} dataSource={data} />
       </div>
+      <StaffUpdateModal visible={isModalVisible} onCancel={handleCancel} values={''} />;
+      <Modal
+        visible={isModalVisible1}
+        onCancel={() => setIsModalVisible1(false)}
+        title="Allocate Group">
+        <Select placeholder="Select a group" showSearch style={{ width: 300 }} allowClear>
+          <Option value="jack">Jack</Option>
+          <Option value="lucy">Lucy</Option>
+          <Option value="tom">Tom</Option>
+        </Select>
+      </Modal>
     </MainLayout>
   );
 };
