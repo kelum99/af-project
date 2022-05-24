@@ -1,6 +1,7 @@
 import React from 'react';
 import MainLayout from '../../components/MainLayout';
 import { Table, Space, Button, Popconfirm, Checkbox  } from 'antd';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
 
 function onChange(e) {
@@ -10,28 +11,28 @@ function onChange(e) {
 const data = [
     {
       key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
+      groupID: 'G001',
+      ResearchTopic: 32,
+      researchDocs: 'New York No. 1 Lake Park'
     },
     {
       key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
+      groupID: 'G002',
+      researchTopic: 32,
+      researchDocs: 'New York No. 1 Lake Park'
     },
     {
       key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
+      groupID: 'G003',
+      researchTopic: 32,
+      researchDocs: 'New York No. 1 Lake Park'
     },
 
     {
       key: '4',
-      name: 'mn Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
+      groupID: 'G004',
+      researchTopic: 32,
+      researchDocs: 'New York No. 1 Lake Park'
     }
   ];
 
@@ -39,30 +40,32 @@ const TopicEvaluation = () => {
 
     const columns = [
         {
-          title: 'Name',
-          dataIndex: 'name',
-          key: 'name',
+          title: 'GroupID',
+          dataIndex: 'groupID',
+          key: 'groupID',
           render: (text) => <a>{text}</a>
         },
         {
-          title: 'Age',
-          dataIndex: 'age',
-          key: 'age'
+          title: 'ResearchTopic',
+          dataIndex: 'researchTopic',
+          key: 'researchTopic'
         },
         {
-          title: 'Address',
-          dataIndex: 'address',
-          key: 'address'
+          title: 'ResearchDocs',
+          dataIndex: 'researchDocs',
+          key: 'researchDocs'
         },
         {
           title: 'Action',
           key: 'action',
           render: (text, record) => (
             <Space size="middle">
-              <Checkbox onChange={onChange}>Yes</Checkbox>;
-              <Checkbox onChange={onChange}>No</Checkbox>;
-              
-            </Space>
+            <Button icon={<EditOutlined />} />
+            <Popconfirm placement="right" title={msg} okText="Yes" cancelText="No">
+              <Button icon={<DeleteOutlined />} />
+            </Popconfirm>
+          </Space>
+
           )
         }
       ];
