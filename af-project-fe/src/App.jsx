@@ -3,14 +3,18 @@ import 'antd/dist/antd.css';
 import './App.css';
 import MainRouter from './MainRouter';
 import { BrowserRouter } from 'react-router-dom';
+import { RequestContextProvider } from './services/RequestContext';
+import { UserContextProvider } from './services/UserContext';
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <MainRouter />
-      </BrowserRouter>
-    </>
+    <RequestContextProvider baseURL={`http://localhost:4000/api/`}>
+      <UserContextProvider>
+        <BrowserRouter>
+          <MainRouter />
+        </BrowserRouter>
+      </UserContextProvider>
+    </RequestContextProvider>
   );
 }
 
