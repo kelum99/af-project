@@ -20,6 +20,9 @@ mongoose.connect(process.env.DB_CONNECT, (err) => {
 const MarkingSchemaRoute = require("./src/Routes/markingSchema.routes");
 app.use("/api/markingschema", MarkingSchemaRoute);
 
+const ResourceRoute = require("./src/Routes/resource.routes");
+app.use("/api/resource", ResourceRoute);
+
 app.listen(4000, (err) => {
   if (!err) {
     console.log("successfully connected to the port ", 4000);

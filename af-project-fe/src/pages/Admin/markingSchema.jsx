@@ -1,63 +1,125 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MainLayout from '../../components/MainLayout';
-import { Table, Space, Button, Popconfirm, Form, Input } from 'antd';
+import { Table, Space, Button, Popconfirm, Form, Input, message } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import './AdminStyles.css';
 import Modal from 'antd/lib/modal/Modal';
-
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park'
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park'
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park'
-  }
-];
+import useRequest from '../../services/RequestContext';
 
 const MarkingSchema = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selected, setSelected] = useState(undefined);
+  const [data, setData] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const { request } = useRequest();
+  const [form] = Form.useForm();
+
+  const getMarkingSchemas = async () => {
+    try {
+      setLoading(true);
+      const res = await request.get('markingschema');
+      if (res.status === 200) {
+        setData(res.data);
+        console.log('sada', res.data);
+      } else {
+        console.log('error getting data', res.data);
+      }
+    } catch (e) {
+      console.log('error!', e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const onReset = () => {
+    form.resetFields();
+  };
 
   const showModal = () => {
     setIsModalVisible(true);
   };
 
-  const handleOk = () => {
+  const handleCancel = () => {
+    setSelected(undefined);
+    setIsEdit(false);
     setIsModalVisible(false);
   };
 
-  const handleCancel = () => {
-    setIsModalVisible(false);
-    setIsEdit(false);
+  const onFinish = async (values) => {
+    if (!isEdit) {
+      try {
+        const res = await request.post('markingschema', values);
+        if (res.status === 201) {
+          message.success('Successfully Added!');
+          handleCancel();
+          getMarkingSchemas();
+          onReset();
+        } else {
+          message.error('Failed Try Again!');
+          onReset();
+        }
+      } catch {
+        console.log('error!', e);
+      }
+    }
+    if (isEdit) {
+      try {
+        const res = await request.put(`markingschema/${selected._id}`, values);
+        if (res.status === 200) {
+          message.success('Successfully Upadted!');
+          handleCancel();
+          getMarkingSchemas();
+          onReset();
+          setSelected(undefined);
+        } else {
+          message.error('Failed Try Again!');
+          onReset();
+        }
+      } catch {
+        console.log('error!', e);
+      }
+    }
   };
+
+  const handleDelete = async (id) => {
+    try {
+      setLoading(true);
+      const res = await request.delete(`markingschema/${id}`);
+      if (res.status === 200) {
+        message.success('Successfully Deleted!');
+        getMarkingSchemas();
+      } else {
+        message.error('Failed Try Again!');
+      }
+    } catch (e) {
+      console.log('error!', e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getMarkingSchemas();
+    handleCancel();
+  }, []);
 
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name'
+      title: 'Title',
+      dataIndex: 'title',
+      key: 'title'
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age'
+      title: 'Description',
+      dataIndex: 'description',
+      key: 'description'
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address'
+      title: 'Created By',
+      dataIndex: 'createdBy',
+      key: 'createdBy'
     },
     {
       title: 'Action',
@@ -68,10 +130,16 @@ const MarkingSchema = () => {
             icon={<EditOutlined />}
             onClick={() => {
               setIsEdit(true);
+              setSelected(record);
               showModal();
             }}
           />
-          <Popconfirm placement="right" title={msg} okText="Yes" cancelText="No">
+          <Popconfirm
+            placement="right"
+            title={msg}
+            okText="Yes"
+            cancelText="No"
+            onConfirm={() => handleDelete(record._id)}>
             <Button icon={<DeleteOutlined />} />
           </Popconfirm>
         </Space>
@@ -86,12 +154,23 @@ const MarkingSchema = () => {
         onCancel={handleCancel}
         width={800}
         title={isEdit ? 'Edit Marking Schema' : 'Add Marking Schema'}
-        footer={null}>
+        footer={[
+          <Button
+            onClick={() => {
+              setSelected(undefined);
+              setIsModalVisible(false);
+            }}>
+            Return
+          </Button>
+        ]}>
         <Form
+          initialValues={isEdit ? selected : undefined}
+          form={form}
           name="basic"
           labelCol={{ span: 6 }}
           wrapperCol={{ span: 20 }}
           autoComplete="off"
+          onFinish={onFinish}
           style={{ width: '80%' }}>
           <Form.Item
             label="Title"
@@ -108,7 +187,7 @@ const MarkingSchema = () => {
           </Form.Item>
 
           {!isEdit && (
-            <Form.Item label="Created By" name="createdby">
+            <Form.Item label="Created By" name="createdBy">
               <Input />
             </Form.Item>
           )}
@@ -124,7 +203,7 @@ const MarkingSchema = () => {
         <Button type="primary" onClick={showModal} style={{ marginBottom: 20 }}>
           Add Marking Schema
         </Button>
-        <Table columns={columns} dataSource={data} />
+        <Table columns={columns} dataSource={data} loading={loading} />
       </div>
     </MainLayout>
   );
