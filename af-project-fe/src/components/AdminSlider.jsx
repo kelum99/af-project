@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import { Menu, Button, Layout } from 'antd';
 import './ComponentsStyles.css';
-import { UserOutlined, PieChartOutlined, FileDoneOutlined } from '@ant-design/icons';
+import { UserOutlined, FileAddOutlined, TeamOutlined, FileDoneOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 
-const AdminSlider = (selectedKey, openKeys) => {
+const AdminSlider = () => {
   const { Sider } = Layout;
   const [collapsed, setCollapsed] = React.useState(false);
   const location = useLocation();
@@ -12,14 +12,6 @@ const AdminSlider = (selectedKey, openKeys) => {
   const onCollapse = () => {
     setCollapsed(!collapsed);
   };
-
-  const SiderKeys = useMemo(() => {
-    const list = location.pathname.split('/');
-    return {
-      selectedKeys: list.length > 2 ? list[2] : list[1],
-      openKeys: list.length > 2 ? list[1] : ''
-    };
-  }, [location]);
 
   return (
     <div>
@@ -33,30 +25,37 @@ const AdminSlider = (selectedKey, openKeys) => {
         collapsible
         collapsed={collapsed}
         onCollapse={onCollapse}>
-        <Menu mode="inline" theme="dark" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']}>
-          <Menu.Item key={['1']}>
-            <Link to={'/usermanagement'}>
+        <Menu
+          mode="inline"
+          theme="dark"
+          defaultSelectedKeys={['/studentmanagement']}
+          selectedKeys={[location.pathname]}>
+          <Menu.Item key={['/studentmanagement']}>
+            <Link to={'/studentmanagement'}>
               <UserOutlined />
-              <span>User Management</span>
+              <span>Student Management</span>
             </Link>
           </Menu.Item>
-          <Menu.Item>
-            <Link to={'/markingschemes'}>
+
+          <Menu.Item key={['/staffmanagement']}>
+            <Link to={'/staffmanagement'}>
+              <TeamOutlined />
+              <span>Staff Management</span>
+            </Link>
+          </Menu.Item>
+
+          <Menu.Item key={['/markingschema']}>
+            <Link to={'/markingschema'}>
               <FileDoneOutlined />
-              <span>Marking Scheme</span>
+              <span>Marking Schema</span>
             </Link>
           </Menu.Item>
-          <Menu.Item>
-            <PieChartOutlined />
-            <span>Option 3</span>
-          </Menu.Item>
-          <Menu.Item>
-            <PieChartOutlined />
-            <span>Option 4</span>
-          </Menu.Item>
-          <Menu.Item>
-            <PieChartOutlined />
-            <span>Option 5</span>
+
+          <Menu.Item key={['/resources']}>
+            <Link to={'/resources'}>
+              <FileAddOutlined />
+              <span>Resources</span>
+            </Link>
           </Menu.Item>
         </Menu>
       </Sider>

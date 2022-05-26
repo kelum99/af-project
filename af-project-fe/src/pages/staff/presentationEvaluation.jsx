@@ -1,143 +1,288 @@
-import React from 'react';
-import MainLayout from '../../components/MainLayout';
-import { Table, Space, Button, Popconfirm,Form } from 'antd';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import React, { useState } from 'react';
+import { Table, Space, Popconfirm, Form, Input, Modal, Button, message, Select } from 'antd';
 
 const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street"
+  {
+    key: '1',
+    MarkingCriteria: 'plagarism',
+    groupid: 'Mike',
+    member1: 32,
+    member2: '10 Downing Street',
+    member3: '',
+    member4: '10 Downing Street'
+  },
+  {
+    key: '2',
+    MarkingCriteria: 'plagarism',
+    groupid: 'Mike',
+    member1: 32,
+    member2: '10 Downing Street',
+    member3: '',
+    member4: '10 Downing Street'
+  },
+  {
+    key: '1',
+    MarkingCriteria: 'plagarism',
+    groupid: 'Mike',
+    member1: 32,
+    member2: '10 Downing Street',
+    member3: '',
+    member4: '10 Downing Street'
+  },
+  {
+    key: '2',
+    MarkingCriteria: 'plagarism',
+    groupid: 'Mike',
+    member1: 32,
+    member2: '10 Downing Street',
+    member3: '',
+    member4: '10 Downing Street'
+  }
+];
+
+const PresentationEvalution = () => {
+  const { Option } = Select;
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const onFinish = values => {
+    console.log('Success:', values);
+  };
+
+  const layout = {
+    labelCol: {
+      span: 8
     },
-    {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street"
+    wrapperCol: {
+      span: 14
     }
-  ];
-  
+  };
+
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name"
+      title: 'Marking Criteria',
+      dataIndex: 'MarkingCriteria',
+      key: 'MarkingCriteria'
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age"
+      title: 'Group ID',
+      dataIndex: 'groupid',
+      key: 'groupid'
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address"
+      title: 'Member 1',
+      dataIndex: 'member1',
+      key: 'member1'
     },
     {
-      title: "Action",
-      key: "action",
-      render: () => <Button>Delete</Button>
+      title: 'Member 2',
+      dataIndex: 'member2',
+      key: 'member2'
+    },
+    {
+      title: 'Member 3',
+      dataIndex: 'member3',
+      key: 'member3'
+    },
+    {
+      title: 'Member 4',
+      dataIndex: 'member4',
+      key: 'member4'
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: () => (
+        <Space size="middle">
+          <Button type="primary" onClick={showModal} style={{ marginBottom: 20 }}>
+            Update
+          </Button>
+        </Space>
+      )
     }
   ];
-  
-  const PresentationEvalution = () => {
-    const onFinish = values => {
-      console.log("Success:", values);
-    };
-  
-    const success = () => {
-      message.success("Item Details Uploaded Successfully !");
-    };
-  
-    const layout = {
-      labelCol: {
-        span: 8
-      },
-      wrapperCol: {
-        span: 14
-      }
-    };
-  
-    return (
-      <div className="MainContainer-Item">
-        <div className="form-item">
-          <Form name="basic" onFinish={onFinish} autoComplete="off">
-            <Form.Item
-              label="Name"
-              name="name"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your username!"
-                }
-              ]}
-            >
-              <Input />
-            </Form.Item>
-  
-            <Form.Item
-              label="Mobile"
-              name="mobile"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your Mobile!"
-                }
-              ]}
-            >
-              <Input />
-            </Form.Item>
-  
-            <Form.Item
-              label="E-Mail"
-              name="email"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your E-Mail!"
-                }
-              ]}
-            >
-              <Input />
-            </Form.Item>
-  
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your password!"
-                }
-              ]}
-            >
-              <Input.Password />
-            </Form.Item>
-            <Form.Item
-              wrapperCol={{
-                offset: 8,
-                span: 16
-              }}
-            ></Form.Item>
-  
-            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 6 }}>
-              <Button type="primary" htmlType="submit" onClick={success}>
+
+  return (
+    <div className="MainContainer-Item">
+      <div className="form-item">
+        <center>
+          <h2 style={{ marginTop: 20 }}> Presentation Evaluation Form</h2>
+        </center>
+        <Form
+          name="basic"
+          onFinish={onFinish}
+          autoComplete="off"
+          labelCol={{ span: 6 }}
+          wrapperCol={{ span: 20 }}
+          style={{ width: '80%', marginTop: 25 }}>
+          <Form.Item
+            label="Group ID"
+            name="groupid"
+            rules={[
+              {
+                required: true,
+                message: 'Please input  Group ID!'
+              }
+            ]}>
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Member 1"
+            name="member1"
+            rules={[
+              {
+                required: true,
+                message: 'Please input marks!'
+              }
+            ]}>
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Member 2"
+            name="member2"
+            rules={[
+              {
+                required: true,
+                message: 'Please input marks!'
+              }
+            ]}>
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Member 3"
+            name="member3"
+            rules={[
+              {
+                required: true,
+                message: 'Please input marks!'
+              }
+            ]}>
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Member 4"
+            name="member4"
+            rules={[
+              {
+                required: true,
+                message: 'Please input marks!'
+              }
+            ]}>
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            wrapperCol={{
+              offset: 8,
+              span: 16
+            }}></Form.Item>
+
+          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 6 }}>
+            <center>
+              {' '}
+              <Button type="primary" htmlType="submit">
                 ADD
               </Button>
-            </Form.Item>
-          </Form>
-  
-          <div>
-            <Table
-              dataSource={dataSource}
-              columns={columns}
-              className="admin-table"
-            />
+            </center>
+          </Form.Item>
+        </Form>
+
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Table dataSource={dataSource} columns={columns} style={{ width: '80%', margin: 15 }} />
           </div>
+          <Modal>
+            title="Upadte" width={800}
+            footer={null}
+            visible={isModalVisible}
+            onOk={handleOk}
+            onCancel={handleCancel}>
+            <div>
+              <Form>
+                <Form.Item
+                  label="Member 1"
+                  name="member1"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Update marks!'
+                    }
+                  ]}>
+                  <Input />
+                </Form.Item>
+
+                <Form.Item
+                  label="Member 2"
+                  name="member2"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Update marks!'
+                    }
+                  ]}>
+                  <Input />
+                </Form.Item>
+
+                <Form.Item
+                  label="Member 3"
+                  name="member3"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Update marks!'
+                    }
+                  ]}>
+                  <Input />
+                </Form.Item>
+
+                <Form.Item
+                  label="Member 4"
+                  name="member4"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Update marks!'
+                    }
+                  ]}>
+                  <Input />
+                </Form.Item>
+
+                <Form.Item
+                  wrapperCol={{
+                    offset: 8,
+                    span: 16
+                  }}></Form.Item>
+
+                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 6 }}>
+                  <center>
+                    <Button type="primary" htmlType="submit">
+                      Upadte
+                    </Button>
+                  </center>
+                </Form.Item>
+              </Form>
+            </div>
+          </Modal>
         </div>
       </div>
-    );
-  };
-  
-  export default PresentationEvalution;
+    </div>
+  );
+};
+
+export default PresentationEvalution;

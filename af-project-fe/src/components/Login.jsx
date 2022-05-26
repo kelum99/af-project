@@ -59,7 +59,7 @@ function Login() {
               htmlType="submit"
               className="loginBtn"
               onClick={() => {
-                navigate('/usermanagement');
+                navigate('/studentmanagement');
               }}>
               Login
             </Button>

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MainLayout from '../../components/MainLayout';
 import { Table, Space, Button, Popconfirm } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import StudentUpdateModal from './studentUpdateModal';
 
 const data = [
   {
@@ -24,13 +25,21 @@ const data = [
   }
 ];
 
-const UserManagement = () => {
+const StudentManagement = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
   const columns = [
     {
       title: 'Name',
       dataIndex: 'name',
-      key: 'name',
-      render: (text) => <a>{text}</a>
+      key: 'name'
     },
     {
       title: 'Age',
@@ -47,7 +56,12 @@ const UserManagement = () => {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <Button icon={<EditOutlined />} />
+          <Button
+            icon={<EditOutlined />}
+            onClick={() => {
+              showModal();
+            }}
+          />
           <Popconfirm placement="right" title={msg} okText="Yes" cancelText="No">
             <Button icon={<DeleteOutlined />} />
           </Popconfirm>
@@ -57,13 +71,13 @@ const UserManagement = () => {
   ];
   const msg = 'Are you sure you want to delete user?';
   return (
-    <MainLayout>
-      <h2 style={{ color: '#fff' }}>User Management</h2>
+    <MainLayout title={'Student Management'}>
       <div>
         <Table columns={columns} dataSource={data} />
       </div>
+      <StudentUpdateModal visible={isModalVisible} onCancel={handleCancel} />
     </MainLayout>
   );
 };
 
-export default UserManagement;
+export default StudentManagement;
