@@ -50,3 +50,15 @@ exports.updateMarkingSchema = async (req, res) => {
     res.status(500).send({ message: "error", data: e });
   }
 };
+
+exports.deleteMarkingSchema = async (req, res) => {
+  try {
+    const deleteMarkingSchema = await MarkingSchema.findByIdAndDelete(
+      req.params.id
+    );
+    res.json(deleteMarkingSchema);
+  } catch (e) {
+    console.log("error", e);
+    res.status(500).send({ message: "error", data: e });
+  }
+};

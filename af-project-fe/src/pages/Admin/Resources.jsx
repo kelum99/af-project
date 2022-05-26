@@ -1,24 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MainLayout from '../../components/MainLayout';
-import { Table, Upload, message, Button } from 'antd';
+import { Table, Upload, message, Button, Space } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import { storage } from '../../services/Firebase';
-import { ref, getDownloadURL, uploadBytesResumable, uploadBytes } from 'firebase/storage';
-
-const dataSource = [
-  {
-    key: '1',
-    name: 'Mike',
-    age: 32,
-    address: '10 Downing Street'
-  },
-  {
-    key: '2',
-    name: 'John',
-    age: 42,
-    address: '10 Downing Street'
-  }
-];
+import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
+import useRequest from '../../services/RequestContext';
 
 const columns = [
   {
@@ -34,16 +20,53 @@ const columns = [
   {
     title: 'Download Link',
     dataIndex: 'url',
-    key: 'url'
+    key: 'url',
+    render: (val) => <a>{val}</a>
   }
 ];
 
 const Resources = () => {
   const { Dragger } = Upload;
+  const { request } = useRequest();
+
   const [file, setFile] = useState();
+  const [data, setData] = useState();
   const [uploading, setUploading] = useState(false);
   const [fileUrl, setFileUrl] = useState(null);
 
+  const addData = async () => {
+    try {
+      if (file && fileUrl) {
+        const res = await request.post('resource', {
+          name: file.name,
+          type: file.type,
+          url: fileUrl
+        });
+        if (res.status === 201) {
+          message.success('Successfully Saved!');
+          setFileUrl(undefined);
+          setFile(undefined);
+          getData();
+        } else {
+          message.error('Save Failed!');
+        }
+      }
+    } catch (e) {
+      console.log('error!', e);
+    }
+  };
+  const getData = async () => {
+    try {
+      const res = await request.get('resource');
+      if (res.status === 200) {
+        setData(res.data);
+      } else {
+        message.error('Failed!');
+      }
+    } catch (e) {
+      console.log('error!', e);
+    }
+  };
   const handleUpload = async () => {
     if (file) {
       setUploading(true);
@@ -57,10 +80,15 @@ const Resources = () => {
             message.success('Successfully Uploaded!');
           })
           .catch((e) => console.log('err', e))
-          .finally(setUploading(false));
+          .finally(() => {
+            setUploading(false);
+          });
       });
     }
   };
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <MainLayout title={'Resources'}>
@@ -79,18 +107,30 @@ const Resources = () => {
           </p>
           <p className="ant-upload-text">Click or drag file to this area to upload</p>
         </Dragger>
-        <Button
-          type="primary"
-          disabled={!file}
-          onClick={handleUpload}
-          loading={uploading}
-          style={{
-            marginTop: 16
-          }}>
-          {uploading ? 'Uploading' : 'Start Upload'}
-        </Button>
+        <Space>
+          <Button
+            type="primary"
+            disabled={!file}
+            onClick={handleUpload}
+            loading={uploading}
+            style={{
+              marginTop: 16
+            }}>
+            {uploading ? 'Uploading' : 'Start Upload'}
+          </Button>
+          <Button
+            type="primary"
+            disabled={!fileUrl}
+            onClick={addData}
+            loading={uploading}
+            style={{
+              marginTop: 16
+            }}>
+            Confirm
+          </Button>
+        </Space>
       </div>
-      <Table dataSource={dataSource} columns={columns} style={{ marginTop: 20 }} />
+      <Table dataSource={data} columns={columns} style={{ marginTop: 20 }} />
     </MainLayout>
   );
 };
