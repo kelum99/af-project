@@ -1,44 +1,30 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
 import './Students.css';
+import useRequest from  "../../services/RequestContext";
 
  function TopicRegister() {
-//   const onReset = () => {
-//     form.resetFields();
-//   };
+  const { request } = useRequest();
+  const [form] = Form.useForm();
 
-  // function TopicRegister() {
-  //   const [form] = Form.useForm();
-  //   const { request } = useRequest();
-  //   const [movies, setMovies] = useState([]);
-  //   const [selectedMovie, setSelectedMovie] = useState(undefined);
-  //   const [isModalVisible, setIsModalVisible] = useState(false);
-  //   const showModal = () => {
-  //     setIsModalVisible(true);
-  //   };
-
-    // const handleCancel = () => {
-    //   setSelectedTopic(undefined);
-    //   setIsModalVisible(false);
-    // };
-
-    // const onReset = () => {
-    //   form.resetFields();
-    // };
+  const onReset = () => {
+    form.resetFields();
+  };
 
   const onFinish = async (values) => {
     try {
       const res = await request.post('topic', values);
       if (res.status === 201) {
         message.success('Topic successfully added!');
-        console.log('move', res);
         onReset();
         getTopics();
       } else {
         message.error('failed!');
+        //form.resetFields();
       }
     } catch (err) {
       console.log('err', err);
+      //form.resetFields();
     }
   };
 
