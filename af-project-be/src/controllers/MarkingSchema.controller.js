@@ -31,3 +31,34 @@ exports.getMarkingSchema = async (req, res) => {
     console.log("Error", e);
   }
 };
+
+exports.updateMarkingSchema = async (req, res) => {
+  try {
+    const data = req.body;
+    if (data) {
+      const updateMarking = await MarkingSchema.updateOne(
+        { _id: req.params.id },
+        { ...data }
+      );
+      console.log("updated ", updateMarking);
+      res.status(200).send({ message: "success", data: updateMarking });
+    } else {
+      res.status(204).send({ message: "update data can not be empty!" });
+    }
+  } catch (e) {
+    console.log("error", e);
+    res.status(500).send({ message: "error", data: e });
+  }
+};
+
+exports.deleteMarkingSchema = async (req, res) => {
+  try {
+    const deleteMarkingSchema = await MarkingSchema.findByIdAndDelete(
+      req.params.id
+    );
+    res.json(deleteMarkingSchema);
+  } catch (e) {
+    console.log("error", e);
+    res.status(500).send({ message: "error", data: e });
+  }
+};
