@@ -27,6 +27,9 @@ app.use("/api/staff", staffRouters);
 const MarkingSchemaRoute = require("./src/Routes/markingSchema.routes");
 app.use("/api/markingschema", MarkingSchemaRoute);
 
+const ResourceRoute = require("./src/Routes/resource.routes");
+app.use("/api/resource", ResourceRoute);
+
 
 app.listen(4000, (err) => {
   if (!err) {
