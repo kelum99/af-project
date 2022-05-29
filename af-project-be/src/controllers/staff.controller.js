@@ -37,7 +37,7 @@ exports.getAllStaff = async (req, res) => {
 
 exports.deleteStaff = async (req, res) => {
   try {
-    const deleteStaff = await Staff.deleteOne(req.params);
+    const deleteStaff = await Staff.findByIdAndDelete(req.params.id);
     res.json(deleteStaff);
   } catch (e) {
     console.log("error", e);
