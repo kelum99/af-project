@@ -69,10 +69,10 @@ const MarkingSchema = () => {
         const res = await request.put(`markingschema/${selected._id}`, values);
         if (res.status === 200) {
           message.success('Successfully Upadted!');
+          setSelected(undefined);
           handleCancel();
           getMarkingSchemas();
           onReset();
-          setSelected(undefined);
         } else {
           message.error('Failed Try Again!');
           onReset();
@@ -102,7 +102,6 @@ const MarkingSchema = () => {
 
   useEffect(() => {
     getMarkingSchemas();
-    handleCancel();
   }, []);
 
   const columns = [
@@ -154,15 +153,7 @@ const MarkingSchema = () => {
         onCancel={handleCancel}
         width={800}
         title={isEdit ? 'Edit Marking Schema' : 'Add Marking Schema'}
-        footer={[
-          <Button
-            onClick={() => {
-              setSelected(undefined);
-              setIsModalVisible(false);
-            }}>
-            Return
-          </Button>
-        ]}>
+        footer={null}>
         <Form
           initialValues={isEdit ? selected : undefined}
           form={form}
@@ -203,7 +194,12 @@ const MarkingSchema = () => {
         <Button type="primary" onClick={showModal} style={{ marginBottom: 20 }}>
           Add Marking Schema
         </Button>
-        <Table columns={columns} dataSource={data} loading={loading} />
+        <Table
+          columns={columns}
+          dataSource={data}
+          loading={loading}
+          rowKey={data.map((v) => v._id)}
+        />
       </div>
     </MainLayout>
   );
