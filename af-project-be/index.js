@@ -17,11 +17,19 @@ mongoose.connect(process.env.DB_CONNECT, (err) => {
   }
 });
 
+
+const topicRouters = require("./src/Routes/topic.routes");
+app.use("/api/topic", topicRouters);
+
+const staffRouters = require("./src/Routes/staff.routes");
+app.use("/api/staff", staffRouters);
+
 const MarkingSchemaRoute = require("./src/Routes/markingSchema.routes");
 app.use("/api/markingschema", MarkingSchemaRoute);
 
 const ResourceRoute = require("./src/Routes/resource.routes");
 app.use("/api/resource", ResourceRoute);
+
 
 app.listen(4000, (err) => {
   if (!err) {

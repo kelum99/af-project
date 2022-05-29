@@ -1,0 +1,28 @@
+.form-container1{
+    margin-right: 400px;
+    margin-top: 90px;
+    background: rgb(156, 202, 206);
+    border: 20px solid #f5f3f3;
+    border-radius: 50px;
+    border-left: -100px;
+    
+    flex-direction: column;
+    justify-content: space-around;
+    
+    max-width: 1200px;
+
+    margin-left:420px;
+    max-height: 2000px;
+}
+
+.h1{
+    font-family: 'Courier New', Courier, monospace;
+    font-style: italic;
+    font: optional;
+    font-weight: bold;
+}
+
+.btn2{
+    margin-right: 330px;
+    float:right;
+}
