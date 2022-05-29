@@ -8,7 +8,7 @@ import useRequest from '../../services/RequestContext';
 
 const MarkingSchema = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [selected, setSelected] = useState(undefined);
+  const [selected, setSelected] = useState();
   const [data, setData] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -44,7 +44,6 @@ const MarkingSchema = () => {
   const handleCancel = () => {
     setSelected(undefined);
     setIsEdit(false);
-    setIsModalVisible(false);
   };
 
   const onFinish = async (values) => {
@@ -53,7 +52,7 @@ const MarkingSchema = () => {
         const res = await request.post('markingschema', values);
         if (res.status === 201) {
           message.success('Successfully Added!');
-          handleCancel();
+          setIsModalVisible(false);
           getMarkingSchemas();
           onReset();
         } else {
@@ -69,13 +68,10 @@ const MarkingSchema = () => {
         const res = await request.put(`markingschema/${selected._id}`, values);
         if (res.status === 200) {
           message.success('Successfully Upadted!');
-          handleCancel();
-          getMarkingSchemas();
-          onReset();
           setSelected(undefined);
+          getMarkingSchemas();
         } else {
           message.error('Failed Try Again!');
-          onReset();
         }
       } catch {
         console.log('error!', e);
@@ -102,7 +98,6 @@ const MarkingSchema = () => {
 
   useEffect(() => {
     getMarkingSchemas();
-    handleCancel();
   }, []);
 
   const columns = [
@@ -131,7 +126,6 @@ const MarkingSchema = () => {
             onClick={() => {
               setIsEdit(true);
               setSelected(record);
-              showModal();
             }}
           />
           <Popconfirm
@@ -149,22 +143,58 @@ const MarkingSchema = () => {
   const msg = 'Are you sure you want to delete user?';
   return (
     <MainLayout title={'Marking Schema'}>
+      {selected !== undefined && (
+        <Modal
+          visible={() => selected !== undefined}
+          onCancel={handleCancel}
+          width={800}
+          title={'Edit Marking Schema'}
+          footer={null}>
+          <Form
+            initialValues={selected}
+            name="edit"
+            labelCol={{ span: 6 }}
+            wrapperCol={{ span: 20 }}
+            autoComplete="off"
+            onFinish={onFinish}
+            style={{ width: '80%' }}>
+            <Form.Item
+              label="Title"
+              name="title"
+              rules={[{ required: true, message: 'Please input title!' }]}>
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Description"
+              name="description"
+              rules={[{ required: true, message: 'Please input your Description!' }]}>
+              <Input.TextArea />
+            </Form.Item>
+
+            {!isEdit && (
+              <Form.Item label="Created By" name="createdBy">
+                <Input />
+              </Form.Item>
+            )}
+
+            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+              <Button type="primary" htmlType="submit">
+                Update
+              </Button>
+            </Form.Item>
+          </Form>
+        </Modal>
+      )}
       <Modal
         visible={isModalVisible}
-        onCancel={handleCancel}
+        onCancel={() => {
+          setIsModalVisible(false);
+        }}
         width={800}
-        title={isEdit ? 'Edit Marking Schema' : 'Add Marking Schema'}
-        footer={[
-          <Button
-            onClick={() => {
-              setSelected(undefined);
-              setIsModalVisible(false);
-            }}>
-            Return
-          </Button>
-        ]}>
+        title={'Add Marking Schema'}
+        footer={null}>
         <Form
-          initialValues={isEdit ? selected : undefined}
           form={form}
           name="basic"
           labelCol={{ span: 6 }}
@@ -194,16 +224,22 @@ const MarkingSchema = () => {
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit">
-              {isEdit ? 'Update' : 'Create'}
+              Create
             </Button>
           </Form.Item>
         </Form>
       </Modal>
+
       <div>
         <Button type="primary" onClick={showModal} style={{ marginBottom: 20 }}>
           Add Marking Schema
         </Button>
-        <Table columns={columns} dataSource={data} loading={loading} />
+        <Table
+          columns={columns}
+          dataSource={data}
+          loading={loading}
+          rowKey={data.map((v) => v._id)}
+        />
       </div>
     </MainLayout>
   );
