@@ -8,8 +8,8 @@ import TopicEvaluation from './pages/staff/topicEvaluation';
 import MarkingSchema from './pages/Admin/markingSchema';
 import StaffManagement from './pages/Admin/staffManagment';
 import Resources from './pages/Admin/Resources';
+import Registration from './pages/Student/Registration';
 import TopicRegister from './pages/Students/topicRegister';
-
 
 const MainRouter = () => {
   return (
@@ -23,8 +23,8 @@ const MainRouter = () => {
         <Route path="/markingschema" element={<MarkingSchema />} />
         <Route path="/staffmanagement" element={<StaffManagement />} />
         <Route path="/resources" element={<Resources />} />
+        <Route path="/studentregistration" element={<Registration />} />
         <Route path="/topicregister" element={<TopicRegister />} />
-        
       </Routes>
     </>
   );
