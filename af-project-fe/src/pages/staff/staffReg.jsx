@@ -53,7 +53,7 @@ function StaffReg() {
         </Form.Item>
 
         <Form.Item
-          name="id"
+          name="staffid"
           label="Staff ID"
           rules={[
             {
@@ -153,7 +153,7 @@ function StaffReg() {
         </Form.Item>
 
         <Form.Item
-          name="type"
+          name="typework"
           label="Type of Work"
           rules={[
             {
