@@ -1,41 +1,39 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message, Select } from 'antd';
 import './Students.css';
-import useRequest from  "../../services/RequestContext";
+import useRequest from '../../services/RequestContext';
 
- function TopicRegister() {
+function Topicregister() {
   const { request } = useRequest();
   const [form] = Form.useForm();
 
   const onReset = () => {
+    console.log('onReset');
     form.resetFields();
   };
 
   const onFinish = async (values) => {
+    console.log('values', values);
+    onReset();
     try {
       const res = await request.post('topic', values);
       if (res.status === 201) {
-        message.success('Topic successfully added!');
+        message.success('Successfully registered your topic!');
         onReset();
-        getTopics();
       } else {
-        message.error('failed!');
-        //form.resetFields();
+        message.success('Registration Failed. Try Again!');
+        onReset();
       }
-    } catch (err) {
-      console.log('err', err);
-      //form.resetFields();
+    } catch (e) {
+      console.log('error', e);
+      onReset();
     }
   };
-
-  // useEffect(() => {
-  //   getTopics();
-  //   handleCancel();
-  // }, []);
 
   return (
     <div className="form-container1">
       <Form
+        form={form}
         layout="horizontal"
         labelCol={{ span: 10 }}
         wrapperCol={{ span: 8 }}
@@ -44,6 +42,22 @@ import useRequest from  "../../services/RequestContext";
           <center>Topic Registertion</center>
         </h1>
         <br />
+
+        <Form.Item
+          label="Facalty"
+          name="facalty"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your facalty'
+            }
+          ]}>
+          <Select>
+            <Select.Option value="computing">Computing</Select.Option>
+            <Select.Option value="engineering">Engineering</Select.Option>
+            <Select.Option value="bm">Business Management</Select.Option>
+          </Select>
+        </Form.Item>
 
         <Form.Item
           label="Group ID"
@@ -78,9 +92,10 @@ import useRequest from  "../../services/RequestContext";
               message: 'Please input your register numbers!'
             }
           ]}>
-          <Input />
+          <Input.TextArea showCount maxLength={50} />
         </Form.Item>
 
+        <br />
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit" className="btn2">
             Submit
@@ -90,4 +105,4 @@ import useRequest from  "../../services/RequestContext";
     </div>
   );
 }
-export default TopicRegister;
+export default Topicregister;
