@@ -15,5 +15,5 @@ const topicEvaluation = new mongoose.Schema({
     },
 });
 
-const topicEvaluation = mongoose.model("topic", topicEvaluation );
-module.exports = topicEvaluation;
+const TopicEvaluation = mongoose.model("topicEv", topicEvaluation );
+module.exports = TopicEvaluation;

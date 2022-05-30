@@ -25,5 +25,5 @@ const presentationEvluationSchema = new mongoose.Schema({
 
 });
 
-const presentationEvluation = mongoose.model("Presentation", presentationEvluationSchema);
-module.exports = presentationEvluation;
+const PresentationEvluation = mongoose.model("Presentation", presentationEvluationSchema);
+module.exports = PresentationEvluation;
