@@ -5,4 +5,6 @@ router.post("/", presentationEvaluationController.createpresentationEvaluation);
 
 router.get("/", presentationEvaluationController.getpresentationEvaluation);
 
-router.get("/". presentationEvaluationController.getAllpresentationEvaluation);
+router.get("/", presentationEvaluationController.getAllpresentationEvaluation);
+
+module.exports = router;
