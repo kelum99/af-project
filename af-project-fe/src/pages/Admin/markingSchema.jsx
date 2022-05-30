@@ -122,7 +122,7 @@ const MarkingSchema = () => {
       render: (text, record) => (
         <Space size="middle">
           <Button
-            icon={<EditOutlined />}
+          
             onClick={() => {
               setIsEdit(true);
               setSelected(record);
