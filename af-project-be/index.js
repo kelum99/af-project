@@ -30,6 +30,11 @@ app.use("/api/markingschema", MarkingSchemaRoute);
 const ResourceRoute = require("./src/Routes/resource.routes");
 app.use("/api/resource", ResourceRoute);
 
+const topicEvaluation = require("./src/Routes/topicEvaluation.routes");
+app.use("/api/topicEvaluation", topicEvaluation);
+
+const presentationEvaluation = require("./src/Routes/presentationEvaluation.routes");
+app.use("/api/presentationEvaluation", presentationEvaluation);
 
 app.listen(4000, (err) => {
   if (!err) {
