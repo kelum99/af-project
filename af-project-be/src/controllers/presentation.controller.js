@@ -3,8 +3,8 @@ const presentationEvaluation = require("../Models/presentationEvaluation");
 exports.createpresentationEvaluation = async (req, res) => {
 
     try {
-        const presentationEvaluation = new Staff(req.body);
-        const savedpresentationEvaluation = await staff.save();
+        const PresentationEvaluation = new presentationEvaluation(req.body);
+        const savedpresentationEvaluation = await PresentationEvaluation.save();
         if (savedpresentationEvaluation) {
           res.status(201).send({ message: "success!", data: savedpresentationEvaluation });
         } else {
@@ -19,8 +19,8 @@ exports.createpresentationEvaluation = async (req, res) => {
 exports.getpresentationEvaluation = async(req, res) => {
 
     try {
-        const presentationEvaluation = await presentationEvaluation.findById(req.params.id);
-        res.json(presentationEvaluation);
+        const PresentationEvaluation = await presentationEvaluation.findById(req.params.id);
+        res.json(PresentationEvaluation);
       } catch (e) {
         console.log("error", e);
         res.status(500).send({ message: "error", data: e });
@@ -30,8 +30,8 @@ exports.getpresentationEvaluation = async(req, res) => {
 exports.getAllpresentationEvaluation = async (req, res) => {
 
     try {
-        const presentationEvaluation = await presentationEvaluation.find({});
-        res.json(presentationEvaluation);
+        const PresentationEvaluation = await presentationEvaluation.find({});
+        res.json(PresentationEvaluation);
       } catch (e) {
         console.log("error", e);
         res.status(500).send({ message: "error", data: e });

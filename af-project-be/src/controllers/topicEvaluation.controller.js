@@ -2,8 +2,8 @@ const topicEvaluation = require("../Models/topicEvaluation");
 
 exports.createtopicEvaluation = async (req, res) => {
     try {
-        const topicEvaluation = new topicEvaluation(req.body);
-        const savedtopicEvaluation = await topicEvaluation.save();
+        const TopicEvaluation = new topicEvaluation(req.body);
+        const savedtopicEvaluation = await TopicEvaluation.save();
         if (savedtopicEvaluation) {
           res.status(201).send({ message: "success!", data: savedtopicEvaluation });
         } else {
@@ -17,8 +17,8 @@ exports.createtopicEvaluation = async (req, res) => {
 
 exports.gettopicEvaluation = async (req, res) => {
     try {
-        const topicEvaluation = await topicEvaluation.findById(req.params.id);
-        res.json(topicEvaluation);
+        const TopicEvaluation = await topicEvaluation.findById(req.params.id);
+        res.json(TopicEvaluation);
       } catch (e) {
         console.log("error", e);
         res.status(500).send({ message: "error", data: e });
@@ -27,8 +27,8 @@ exports.gettopicEvaluation = async (req, res) => {
 
 exports.getAlltopicEvaluation = async (req, res) => {
     try {
-        const topicEvaluation = await topicEvaluation.find({});
-        res.json(topicEvaluation);
+        const TopicEvaluation = await topicEvaluation.find({});
+        res.json(TopicEvaluation);
       } catch (e) {
         console.log("error", e);
         res.status(500).send({ message: "error", data: e });
