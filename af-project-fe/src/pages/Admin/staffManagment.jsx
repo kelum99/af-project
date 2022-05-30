@@ -27,8 +27,6 @@ const StaffManagement = () => {
       const res = await request.get('staff');
       if (res.status === 200) {
         setData(res.data);
-        setSelected(undefined);
-        console.log('asd', res.data);
       } else {
         message.error('Data fetch failed!');
       }
@@ -139,120 +137,122 @@ const StaffManagement = () => {
       <div>
         <Table columns={columns} dataSource={data} />
       </div>
-      <Modal
-        title="Staff Update Form"
-        visible={isModalVisible}
-        onCancel={handleCancel}
-        footer={null}
-        width={800}>
-        <Form
-          layout="horizontal"
-          labelCol={{ span: 6 }}
-          onFinish={updateStaff}
-          wrapperCol={{ span: 12 }}
-          initialValues={selected}>
-          <Form.Item
-            label="Full Name"
-            name="fullname"
-            rules={[
-              {
-                required: true,
-                message: 'Please input Full Name!'
-              }
-            ]}>
-            <Input />
-          </Form.Item>
+      {selected !== undefined && (
+        <Modal
+          title="Staff Update Form"
+          visible={isModalVisible}
+          onCancel={handleCancel}
+          footer={null}
+          width={800}>
+          <Form
+            layout="horizontal"
+            labelCol={{ span: 6 }}
+            onFinish={updateStaff}
+            wrapperCol={{ span: 12 }}
+            initialValues={selected}>
+            <Form.Item
+              label="Full Name"
+              name="fullname"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input Full Name!'
+                }
+              ]}>
+              <Input />
+            </Form.Item>
 
-          <Form.Item
-            name="email"
-            label="E-mail"
-            rules={[
-              {
-                type: 'email',
-                message: 'The input is not valid E-mail!'
-              },
-              {
-                required: true,
-                message: 'Please input your E-mail!'
-              }
-            ]}>
-            <Input />
-          </Form.Item>
+            <Form.Item
+              name="email"
+              label="E-mail"
+              rules={[
+                {
+                  type: 'email',
+                  message: 'The input is not valid E-mail!'
+                },
+                {
+                  required: true,
+                  message: 'Please input your E-mail!'
+                }
+              ]}>
+              <Input />
+            </Form.Item>
 
-          <Form.Item
-            name="phone"
-            label="Phone Number"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your phone number!'
-              }
-            ]}>
-            <Input
-              style={{
-                width: '100%'
-              }}
-              maxLength={10}
-            />
-          </Form.Item>
+            <Form.Item
+              name="phone"
+              label="Phone Number"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your phone number!'
+                }
+              ]}>
+              <Input
+                style={{
+                  width: '100%'
+                }}
+                maxLength={10}
+              />
+            </Form.Item>
 
-          <Form.Item
-            name="gender"
-            label="Gender"
-            rules={[
-              {
-                required: true,
-                message: 'Please select gender!'
-              }
-            ]}>
-            <Select placeholder="select your gender">
-              <Option value="male">Male</Option>
-              <Option value="female">Female</Option>
-            </Select>
-          </Form.Item>
+            <Form.Item
+              name="gender"
+              label="Gender"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please select gender!'
+                }
+              ]}>
+              <Select placeholder="select your gender">
+                <Option value="male">Male</Option>
+                <Option value="female">Female</Option>
+              </Select>
+            </Form.Item>
 
-          <Form.Item
-            name="address"
-            label="Address"
-            rules={[
-              {
-                required: true,
-                message: 'Please input Intro'
-              }
-            ]}>
-            <Input.TextArea showCount maxLength={100} />
-          </Form.Item>
+            <Form.Item
+              name="address"
+              label="Address"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input Intro'
+                }
+              ]}>
+              <Input.TextArea showCount maxLength={100} />
+            </Form.Item>
 
-          <Form.Item
-            name="role"
-            label="Type of Work"
-            rules={[
-              {
-                required: true,
-                message: 'Please select working type!'
-              }
-            ]}>
-            <Select placeholder="select your type">
-              <Option value="Supervisor">Supervisor</Option>
-              <Option value="Co-supervisor">Co-Supervisor</Option>
-              <Option value="Panel member">Panel Member</Option>
-            </Select>
-          </Form.Item>
+            <Form.Item
+              name="role"
+              label="Type of Work"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please select working type!'
+                }
+              ]}>
+              <Select placeholder="select your type">
+                <Option value="Supervisor">Supervisor</Option>
+                <Option value="Co-supervisor">Co-Supervisor</Option>
+                <Option value="Panel member">Panel Member</Option>
+              </Select>
+            </Form.Item>
 
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16
-            }}>
-            <center>
-              {' '}
-              <Button type="primary" htmlType="submit" className="btnsubmit">
-                Submit
-              </Button>
-            </center>
-          </Form.Item>
-        </Form>
-      </Modal>
+            <Form.Item
+              wrapperCol={{
+                offset: 8,
+                span: 16
+              }}>
+              <center>
+                {' '}
+                <Button type="primary" htmlType="submit" className="btnsubmit">
+                  Submit
+                </Button>
+              </center>
+            </Form.Item>
+          </Form>
+        </Modal>
+      )}
       <Modal
         visible={isModalVisible1}
         onCancel={() => setIsModalVisible1(false)}
