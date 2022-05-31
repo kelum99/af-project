@@ -30,6 +30,9 @@ app.use("/api/markingschema", MarkingSchemaRoute);
 const ResourceRoute = require("./src/Routes/resource.routes");
 app.use("/api/resource", ResourceRoute);
 
+const GroupRouters = require("./src/Routes/group.routes");
+app.use("/api/group", GroupRouters);
+
 
 app.listen(4000, (err) => {
   if (!err) {
