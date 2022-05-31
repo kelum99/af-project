@@ -1,7 +1,9 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox, Select } from 'antd';
+import { Form, Input, Button, Checkbox, Select, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import useRequest from '../../services/RequestContext';
 import './RegStyles.css';
+import { async } from '@firebase/util';
 
 const prefixSelector = (
   <Form.Item name="prefix" noStyle>
@@ -17,9 +19,40 @@ const prefixSelector = (
 );
 
 function StaffReg() {
+  const {request} = useRequest();
+  const [form] = Form.useForm();
+
+  const onReset = () => {
+    console.log('onReset');
+    form.resetFields();
+  };
+
+  const onFinish = async (values) => {
+    console.log('values',values);
+    onReset();
+    try{
+      const res = await request.post('staff', values);
+      if (res.status === 201) {
+        message.success('Successfully Registered !');
+        onReset();
+      }else{
+        message.success('Registration Failed. Try Again !');
+        //onReset();
+      }
+    }catch(e) {
+      console.log('error', e);
+      //onReset();
+    }
+  };
+
   return (
     <div className="formP">
-      <Form layout="horizontal" labelCol={{ span: 10 }} wrapperCol={{ span: 8 }}>
+      <Form 
+      form={form}
+      layout="horizontal" 
+      labelCol={{ span: 10 }}
+       wrapperCol={{ span: 8 }}
+       onFinish={onFinish}>
         <h1>
           <center>Staff Registertion</center>{' '}
         </h1>

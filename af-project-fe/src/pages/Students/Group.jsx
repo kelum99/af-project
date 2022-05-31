@@ -38,9 +38,9 @@ function Group(){
             }
           ]}>
           <Select>
-            <Select.Option value=""></Select.Option>
-            <Select.Option value=""></Select.Option>
-            <Select.Option value=""></Select.Option>
+            <Select.Option value="IT202040">IT202040</Select.Option>
+            <Select.Option value="IT202042">IT202042</Select.Option>
+            <Select.Option value="IT202041">IT202041</Select.Option>
           </Select>
         </Form.Item>
 
@@ -54,9 +54,9 @@ function Group(){
             }
           ]}>
           <Select>
-            <Select.Option value=""></Select.Option>
-            <Select.Option value=""></Select.Option>
-            <Select.Option value=""></Select.Option>
+            <Select.Option value="IT202040">IT202040</Select.Option>
+            <Select.Option value="IT202042">IT202042</Select.Option>
+            <Select.Option value="IT202041">IT202041</Select.Option>
           </Select>
         </Form.Item>
 
@@ -70,9 +70,9 @@ function Group(){
             }
           ]}>
           <Select>
-            <Select.Option value=""></Select.Option>
-            <Select.Option value=""></Select.Option>
-            <Select.Option value=""></Select.Option>
+          <Select.Option value="IT202040">IT202040</Select.Option>
+            <Select.Option value="IT202042">IT202042</Select.Option>
+            <Select.Option value="IT202041">IT202041</Select.Option>
           </Select>
         </Form.Item>
 
@@ -86,9 +86,9 @@ function Group(){
             }
           ]}>
           <Select>
-            <Select.Option value=""></Select.Option>
-            <Select.Option value=""></Select.Option>
-            <Select.Option value=""></Select.Option>
+            <Select.Option value="saman">Saman</Select.Option>
+            <Select.Option value="nimal">Nimal</Select.Option>
+            <Select.Option value="kusal">Kusal</Select.Option>
           </Select>
         </Form.Item>
 
@@ -102,9 +102,9 @@ function Group(){
             }
           ]}>
           <Select>
-            <Select.Option value=""></Select.Option>
-            <Select.Option value=""></Select.Option>
-            <Select.Option value=""></Select.Option>
+          <Select.Option value="saman">Saman</Select.Option>
+            <Select.Option value="nimal">Nimal</Select.Option>
+            <Select.Option value="kusal">Kusal</Select.Option>
           </Select>
         </Form.Item>
 
