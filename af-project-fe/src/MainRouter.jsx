@@ -11,6 +11,8 @@ import StaffManagement from './pages/Admin/staffManagment';
 import Resources from './pages/Admin/Resources';
 import Registration from './pages/Student/Registration';
 import TopicRegister from './pages/Students/topicRegister';
+import Group from './pages/Students/Group';
+
 
 const MainRouter = () => {
   return (
@@ -27,6 +29,7 @@ const MainRouter = () => {
         <Route path="/resources" element={<Resources />} />
         <Route path="/studentregistration" element={<Registration />} />
         <Route path="/topicregister" element={<TopicRegister />} />
+        <Route path='/Group' element={<Group />} />
       </Routes>
     </>
   );
