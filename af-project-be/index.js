@@ -17,7 +17,6 @@ mongoose.connect(process.env.DB_CONNECT, (err) => {
   }
 });
 
-
 const topicRouters = require("./src/Routes/topic.routes");
 app.use("/api/topic", topicRouters);
 
@@ -30,6 +29,8 @@ app.use("/api/markingschema", MarkingSchemaRoute);
 const ResourceRoute = require("./src/Routes/resource.routes");
 app.use("/api/resource", ResourceRoute);
 
+const StudentRoute = require("./src/Routes/student.routes");
+app.use("/api/student", StudentRoute);
 
 app.listen(4000, (err) => {
   if (!err) {
