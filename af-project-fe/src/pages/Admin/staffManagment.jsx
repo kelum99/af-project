@@ -68,8 +68,8 @@ const StaffManagement = () => {
   const columns = [
     {
       title: 'Staff Id',
-      dataIndex: 'staffid',
-      key: 'staffid'
+      dataIndex: 'staffId',
+      key: 'staffId'
     },
     {
       title: 'Full Name',

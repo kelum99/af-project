@@ -75,8 +75,8 @@ const StudentManagement = () => {
     },
     {
       title: 'Register Number',
-      dataIndex: 'regNumber',
-      key: 'regNumber'
+      dataIndex: 'studentId',
+      key: 'studentId'
     },
     {
       title: 'Mobile',
@@ -158,24 +158,6 @@ const StudentManagement = () => {
               ]}
               hasFeedback>
               <Input style={{ width: 400, borderRadius: 4, height: 40 }} placeholder="Name" />
-            </Form.Item>
-
-            <Form.Item
-              className="lableText"
-              label="Registration Number"
-              name="regNumber"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your Registration number!'
-                },
-                {
-                  len: 10,
-                  message: 'Registration number must be 10 characters!'
-                }
-              ]}
-              hasFeedback>
-              <Input style={{ width: 400, borderRadius: 4, height: 40 }} placeholder="ITXXXXXXXX" />
             </Form.Item>
 
             <Form.Item

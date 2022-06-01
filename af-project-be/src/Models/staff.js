@@ -9,7 +9,7 @@ const staffSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  staffid: {
+  staffId: {
     type: String,
     required: true,
   },
