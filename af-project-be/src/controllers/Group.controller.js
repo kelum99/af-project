@@ -15,6 +15,17 @@ exports.createGroup = async (req, res) => {
     }
 };
 
+exports.getGroup = async(req, res) => {
+    try{
+        const group = await Group.findById(req.params.id);
+        res.json(group);
+    }catch (e){
+        console.log("error", e);
+        res.status(500).send({message: "error", data: e});
+    }
+}
+
+
 exports.deleteGroup = async (req, res) => {
     try {
       const deleteGroup = await Group.deleteOne(req.params);

@@ -25,6 +25,13 @@ const GroupSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    panalmember:{
+        type: String,
+    },
+    status:{
+        type: String,
+    }
+
 
 });
 
