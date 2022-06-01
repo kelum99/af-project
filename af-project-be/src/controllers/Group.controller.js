@@ -23,7 +23,17 @@ exports.getGroup = async(req, res) => {
         console.log("error", e);
         res.status(500).send({message: "error", data: e});
     }
-}
+};
+
+exports.getAllGroups = async (req, res) => {
+    try{
+        const groups = await Group.find({});
+        res.json(groups);
+    }catch (e) {
+        console.log("error", e);
+        res.status(500).send({message: "error", data: e});
+    }
+};
 
 
 exports.deleteGroup = async (req, res) => {
