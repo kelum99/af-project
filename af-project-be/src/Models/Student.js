@@ -6,7 +6,7 @@ const studentSchema = new mongoose.Schema({
     required: true,
   },
 
-  regNumber: {
+  studentId: {
     type: String,
     required: true,
   },
@@ -31,6 +31,12 @@ const studentSchema = new mongoose.Schema({
   specialization: {
     type: String,
     required: true,
+  },
+  groupId: {
+    type: String,
+  },
+  role: {
+    type: String,
   },
 });
 
