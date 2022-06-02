@@ -1,9 +1,10 @@
 import React from "react";
 import "./Registration.css";
 import "antd/dist/antd.css"; 
-import { Form, Input, Button, Typography, Card, Checkbox, Select } from "antd";
+import { Form, Input, Button, Typography, Card, Checkbox, Select, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import useRequest from "../../services/RequestContext";
+import Headers from '../../components/Headers';
 
 function Registration() {
     const navigate = useNavigate();
@@ -29,6 +30,19 @@ function Registration() {
             } catch (e) {
             console.log("error", e);
             form.resetFields();
+        }
+    };
+
+    const getAllStudents = async (values) => {
+        try{
+            const res = await request.getAllStudents("student");
+            if(res.status === 200){
+                console.log("students", res);
+            }else{
+                message.error("failed");
+            }
+        }catch (err){
+            console.log("err", err);
         }
     };
 

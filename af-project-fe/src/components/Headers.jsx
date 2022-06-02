@@ -26,6 +26,9 @@ const Headers = (props) => {
             <Menu.Item key={['/group']}>
               <Link to={'/group'}>Groups</Link>
             </Menu.Item>
+            <Menu.Item key={['/student']}>
+              <Link to={'/student'}>Student</Link>
+            </Menu.Item>
           </Menu>
         </Header>
         <Content className="site-layout-background" style={{ padding: '0 24px 24px' }}>
