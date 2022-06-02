@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button, Checkbox, Select, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import useRequest from '../../services/RequestContext';
 import './RegStyles.css';
 import { async } from '@firebase/util';
+//import { set } from 'mongoose';
 
 const prefixSelector = (
   <Form.Item name="prefix" noStyle>
@@ -21,6 +22,8 @@ const prefixSelector = (
 function StaffReg() {
   const {request} = useRequest();
   const [form] = Form.useForm();
+  //const [staffs,setStaffs] = useState([]);
+  //const [setSelectedStaff, setSelectedStaff] = useState(undefined);
 
   const onReset = () => {
     console.log('onReset');
@@ -35,6 +38,7 @@ function StaffReg() {
       if (res.status === 201) {
         message.success('Successfully Registered !');
         onReset();
+        getStaff();
       }else{
         message.success('Registration Failed. Try Again !');
         //onReset();
@@ -44,6 +48,22 @@ function StaffReg() {
       //onReset();
     }
   };
+
+const getStaff = async () => {
+  try{
+    const res = await request.get("staff");
+    if(res.status === 200) {
+      console.log("staffs", res);
+      //setStaffs(res.data);
+      //setSelectedStaff(undefined);
+    }else{
+      message.error("failed!");
+    }
+  }catch (err){
+    console.log("err", err);
+  }
+}; 
+
 
   return (
     <div className="formP">

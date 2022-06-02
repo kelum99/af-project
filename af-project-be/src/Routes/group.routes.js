@@ -5,4 +5,8 @@ router.post("/", GroupController.createGroup);
 
 router.delete("/:id",GroupController.deleteGroup);
 
+router.get("/:id",GroupController.getGroup);
+
+router.get("/",GroupController.getAllGroups );
+
 module.exports = router;
