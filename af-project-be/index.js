@@ -29,8 +29,12 @@ app.use("/api/markingschema", MarkingSchemaRoute);
 const ResourceRoute = require("./src/Routes/resource.routes");
 app.use("/api/resource", ResourceRoute);
 
+const GroupRouters = require("./src/Routes/group.routes");
+app.use("/api/group", GroupRouters);
+
 const StudentRoute = require("./src/Routes/student.routes");
 app.use("/api/student", StudentRoute);
+
 const topicEvaluation = require("./src/Routes/topicEvaluation.routes");
 app.use("/api/topicEvaluation", topicEvaluation);
 
