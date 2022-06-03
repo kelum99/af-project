@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
-const { Header, Content, Footer} = Layout;
+const { Header, Content, Footer } = Layout;
 import { Link, useLocation } from 'react-router-dom';
 
 export const StudentHeader = (props) => {
@@ -31,7 +31,7 @@ export const StudentHeader = (props) => {
             </Menu.Item>
           </Menu>
         </Header>
-        <Content className="site-layout-background" style={{ padding: '0 24px 24px' }}>
+        <Content className="site-layout-background" style={{ padding: '80px 10px' }}>
           <div className="content-container">
             <div>{props.children}</div>
           </div>
@@ -48,8 +48,6 @@ export const StudentHeader = (props) => {
     </>
   );
 };
-
-
 
 export const StaffHeader = (props) => {
   const location = useLocation();
@@ -76,7 +74,7 @@ export const StaffHeader = (props) => {
             </Menu.Item>
           </Menu>
         </Header>
-        <Content className="site-layout-background" style={{ padding: '0 24px 24px' }}>
+        <Content className="site-layout-background" style={{ padding: '80px 10px' }}>
           <div className="content-container">
             <div>{props.children}</div>
           </div>
@@ -93,7 +91,3 @@ export const StaffHeader = (props) => {
     </>
   );
 };
-
-
-
-

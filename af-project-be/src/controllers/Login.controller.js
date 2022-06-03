@@ -61,6 +61,7 @@ exports.Stafflogin = async (req, res) => {
             email: result.email,
             role: result.role,
             staffId: result.staffId,
+            name: result.fullname,
           },
         },
         "secret"
@@ -73,6 +74,7 @@ exports.Stafflogin = async (req, res) => {
           email: result.email,
           role: result.role,
           staffId: result.staffId,
+          name: result.fullname,
         },
       });
     } else {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, message, Select, Descriptions } from 'antd';
 import './Students.css';
-import {StudentHeader} from '../../components/Headers';
+import { StudentHeader } from '../../components/Headers';
 import useRequest from '../../services/RequestContext';
 import useUser from '../../services/UserContext';
 
@@ -23,7 +23,7 @@ function Group() {
   const onFinish = async (values) => {
     try {
       values.groupId = `GRP_${Math.floor(Math.random() * 2000) + 1}`;
-      values.status = 'Pendding';
+      values.status = 'Pending';
       values.panelMember = 'Not Set';
       const res = await request.post('group', values);
       if (res.status === 201) {
