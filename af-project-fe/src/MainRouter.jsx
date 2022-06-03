@@ -12,7 +12,7 @@ import Resources from './pages/Admin/Resources';
 import Registration from './pages/Student/Registration';
 import TopicRegister from './pages/Students/topicRegister';
 import Group from './pages/Students/Group';
-import Home from './components/Home'
+import Home from './components/Home';
 import RequestAccept from './pages/staff/requestAccept';
 import ViewDetails from './pages/staff/ViewDetails';
 
@@ -33,7 +33,7 @@ const MainRouter = () => {
         <Route path="/studentregistration" element={<Registration />} />
         <Route path="/topicregister" element={<TopicRegister />} />
         <Route path="/Group" element={<Group />} />
-        <Route path="/Home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/requestAccept" element={<RequestAccept />} />
         <Route path="/ViewDetails" element={<ViewDetails />} />
       </Routes>
