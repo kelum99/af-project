@@ -6,7 +6,7 @@ const studentSchema = new mongoose.Schema({
         required: true,
     },
 
-    regNumber: {
+    studentId: {
         type: String,
         required: true,
     },
@@ -23,12 +23,22 @@ const studentSchema = new mongoose.Schema({
     faculty: {
         type: String,
     },
+    password: {
+        type: String,
+        required: true,
+    },
 
     specialization: {
         type: String,
         required: true,
     },
+    groupId: {
+        type: String,
+    },
+    role: {
+        type: String,
+    },
 });
 
 const student = mongoose.model("Student", studentSchema);
-module.exports = customer;
+module.exports = student;

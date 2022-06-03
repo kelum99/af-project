@@ -1,9 +1,10 @@
 import React from "react";
 import "./Registration.css";
 import "antd/dist/antd.css"; 
-import { Form, Input, Button, Typography, Card, Checkbox, Select } from "antd";
+import { Form, Input, Button, Typography, Card, Checkbox, Select, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import useRequest from "../../services/RequestContext";
+import Headers from '../../components/Headers';
 
 function Registration() {
     const navigate = useNavigate();
@@ -23,12 +24,25 @@ function Registration() {
                 message.success("Successfully Registered!");
                 navigate("/login");
             } else {
-                message.success("Registration Failed. Try Again!");
+                message.success("Registration Failed, Try Again!");
                 form.resetFields();
             }
             } catch (e) {
-            console.log("error", e);
-            form.resetFields();
+                console.log("error", e);
+                form.resetFields();
+        }
+    };
+
+    const getAllStudents = async (values) => {
+        try{
+            const res = await request.getAllStudents("student");
+            if(res.status === 200){
+                console.log("students", res);
+            }else{
+                message.error("failed");
+            }
+        }catch (err){
+            console.log("err", err);
         }
     };
 
@@ -73,7 +87,7 @@ function Registration() {
                     <Form.Item
                     className="lableText"
                     label="Registration Number"
-                    name="regNumber"
+                    name="studentId"
                     rules={[
                         {
                         required: true,
@@ -144,10 +158,10 @@ function Registration() {
                         }}
                         onChange={handleChange}
                     >
-                        <Option value="foc">Faculty of Computing</Option>
-                        <Option value="fob">Faculty of Business</Option>
-                        <Option value="foe">Faculty of Engineering</Option>
-                        <Option value="foh">Faculty of Humanities</Option>
+                        <Option value="Faculty of Computing">Faculty of Computing</Option>
+                        <Option value="Faculty of Business">Faculty of Business</Option>
+                        <Option value="Faculty of Engineering">Faculty of Engineering</Option>
+                        <Option value="Faculty of Humanities">Faculty of Humanities</Option>
                     </Select>
                     </Form.Item>
 

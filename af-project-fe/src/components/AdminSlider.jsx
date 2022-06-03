@@ -1,16 +1,32 @@
 import React, { useMemo } from 'react';
 import { Menu, Button, Layout } from 'antd';
 import './ComponentsStyles.css';
-import { UserOutlined, FileAddOutlined, TeamOutlined, FileDoneOutlined } from '@ant-design/icons';
-import { Link, useLocation } from 'react-router-dom';
+import {
+  UserOutlined,
+  FileAddOutlined,
+  TeamOutlined,
+  FileDoneOutlined,
+  LogoutOutlined
+} from '@ant-design/icons';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useRequest from '../services/RequestContext';
+import useUser from '../services/UserContext';
 
 const AdminSlider = () => {
   const { Sider } = Layout;
-  const [collapsed, setCollapsed] = React.useState(false);
+  const { user, setUser } = useUser();
+  const { UpdateToken } = useRequest();
+  const navigate = useNavigate();
   const location = useLocation();
 
+  const [collapsed, setCollapsed] = React.useState(false);
   const onCollapse = () => {
     setCollapsed(!collapsed);
+  };
+
+  const logout = async () => {
+    await UpdateToken(undefined);
+    setUser({});
   };
 
   return (
@@ -57,6 +73,14 @@ const AdminSlider = () => {
               <span>Resources</span>
             </Link>
           </Menu.Item>
+          {user && (
+            <Menu.Item key={['/login/staff']}>
+              <Link onClick={logout} to={'/login/staff'}>
+                <LogoutOutlined />
+                <span>Logout</span>
+              </Link>
+            </Menu.Item>
+          )}
         </Menu>
       </Sider>
     </div>

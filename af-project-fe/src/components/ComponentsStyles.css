@@ -17,4 +17,22 @@
     height: 50px;
     border-radius: 5px;
 }
+
+.staffBtn{
+    width: 280px;
+    margin-top: 200px;
+    font-weight: 500;
+    height: 50px;
+    border-radius: 5px;
+    margin-left: 400px;
+}
+
+.studentBtn{
+    width: 280px;
+    margin-top: 200px;
+    font-weight: 500;
+    height: 50px;
+    border-radius: 5px;
+    margin-left: 450px;
+}
   

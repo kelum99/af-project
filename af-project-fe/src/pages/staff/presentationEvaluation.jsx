@@ -3,6 +3,7 @@ import { Table, Space, Popconfirm, Form, Input, Modal, Button, message, Select }
 import useRequest from '../../services/RequestContext';
 import { jsPDF } from 'jspdf';
 import { DownloadOutlined } from '@ant-design/icons';
+import { StaffHeader } from '../../components/Headers';
 
 const PresentationEvalution = () => {
   const { Option } = Select;
@@ -175,6 +176,7 @@ const PresentationEvalution = () => {
   }, []);
 
   return (
+    <StaffHeader>
     <div className="MainContainer-Item">
       <div className="form-item">
         <center>
@@ -369,6 +371,7 @@ const PresentationEvalution = () => {
         </div>
       </div>
     </div>
+    </StaffHeader>
   );
 };
 export default PresentationEvalution;

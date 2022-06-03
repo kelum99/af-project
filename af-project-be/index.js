@@ -17,7 +17,6 @@ mongoose.connect(process.env.DB_CONNECT, (err) => {
   }
 });
 
-
 const topicRouters = require("./src/Routes/topic.routes");
 app.use("/api/topic", topicRouters);
 
@@ -30,6 +29,12 @@ app.use("/api/markingschema", MarkingSchemaRoute);
 const ResourceRoute = require("./src/Routes/resource.routes");
 app.use("/api/resource", ResourceRoute);
 
+const GroupRouters = require("./src/Routes/group.routes");
+app.use("/api/group", GroupRouters);
+
+const StudentRoute = require("./src/Routes/student.routes");
+app.use("/api/student", StudentRoute);
+
 const topicEvaluation = require("./src/Routes/topicEvaluation.routes");
 app.use("/api/topicEvaluation", topicEvaluation);
 
@@ -38,6 +43,10 @@ app.use("/api/presentationEvaluation", presentationEvaluation);
 
 const TopicFeedback = require("./src/Routes/topicFeedback.routes");
 app.use("/api/topicFeedback", TopicFeedback);
+
+const loginRoute = require("./src/Routes/login.routes");
+app.use("/api/login", loginRoute);
+
 
 app.listen(4000, (err) => {
   if (!err) {

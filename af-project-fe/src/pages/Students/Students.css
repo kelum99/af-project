@@ -26,3 +26,21 @@
     margin-right: 330px;
     float:right;
 }
+
+.btn3{
+width: 200px;
+}
+
+.form-container2{
+    margin: 10%;
+    width: 70%;;
+    background: rgb(156, 202, 206);
+    border: 20px solid #f5f3f3;
+}
+
+.groupDetails{
+    margin: 5% 10px;
+    border: 1px solid gray;
+    padding: 10px;
+
+}

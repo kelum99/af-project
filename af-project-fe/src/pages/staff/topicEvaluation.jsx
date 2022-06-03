@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Space, Button, Popconfirm, Checkbox, Modal, Form, Input, message } from 'antd';
 import useRequest from '../../services/RequestContext';
-
-
-
+import { StaffHeader } from '../../components/Headers';
 
 const TopicEvaluation = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -13,9 +11,6 @@ const TopicEvaluation = () => {
   const showModal = () => {
     setIsModalVisible(true);
   };
-
-  
-      
 
   const handleOk = () => {
     setIsModalVisible(false);
@@ -42,9 +37,7 @@ const TopicEvaluation = () => {
     }
   };
 
- 
-
-  const updatetopicEvaluation = async (values) => {
+  const updatetopicEvaluation = async values => {
     try {
       const res = await request.put(`staff/${selected._id}`, values);
       if (res.status === 200) {
@@ -59,8 +52,6 @@ const TopicEvaluation = () => {
       console.log('err', e);
     }
   };
-
-
 
   const onReset = () => {
     form.resetFields();
@@ -119,76 +110,66 @@ const TopicEvaluation = () => {
     gettopicEvaluation();
   }, []);
 
-
- 
-
-
   return (
-    <div className="MainContainer-Item">
- 
-      <h2 style={{ color: '#fff' }}>User Management</h2>
-   
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Table dataSource={data} columns={columns} style={{ width: '80%', margin: 15 }} />
-      </div>
-      
-      <Modal
-        title="Feedback"
-        width={800}
-        footer={null}
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}>
-        <div>
-          <Form
-           autoComplete="off"
-           labelCol={{ span: 6 }}
-           wrapperCol={{ span: 20 }}
-           form={form}>
-         
-            <Form.Item
-              label="Feedback"
-              name="feedback"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input  Feedback!'
-                }
-              ]}>
-              <Input />
-            </Form.Item>
+    <StaffHeader>
+      <div className="MainContainer-Item">
+        <h2 style={{ color: '#fff' }}>User Management</h2>
 
-            <Form.Item
-              label="Status"
-              name="status"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input  Feedback!'
-                }
-              ]}>
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              wrapperCol={{
-                offset: 8,
-                span: 16
-              }}></Form.Item>
-
-            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 6 }}>
-              <center>
-                <Button type="primary" htmlType="submit" style={{ marginRight: 70 }}>
-                  Submit
-                </Button>
-                </center>
-            </Form.Item>
-          </Form>
-
-
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Table dataSource={data} columns={columns} style={{ width: '80%', margin: 15 }} />
         </div>
-      </Modal>
-    </div> 
+
+        <Modal
+          title="Feedback"
+          width={800}
+          footer={null}
+          visible={isModalVisible}
+          onOk={handleOk}
+          onCancel={handleCancel}>
+          <div>
+            <Form autoComplete="off" labelCol={{ span: 6 }} wrapperCol={{ span: 20 }} form={form}>
+              <Form.Item
+                label="Feedback"
+                name="feedback"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input  Feedback!'
+                  }
+                ]}>
+                <Input />
+              </Form.Item>
+
+              <Form.Item
+                label="Status"
+                name="status"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input  Feedback!'
+                  }
+                ]}>
+                <Input />
+              </Form.Item>
+
+              <Form.Item
+                wrapperCol={{
+                  offset: 8,
+                  span: 16
+                }}></Form.Item>
+
+              <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 6 }}>
+                <center>
+                  <Button type="primary" htmlType="submit" style={{ marginRight: 70 }}>
+                    Submit
+                  </Button>
+                </center>
+              </Form.Item>
+            </Form>
+          </div>
+        </Modal>
+      </div>
+    </StaffHeader>
   );
 };
 

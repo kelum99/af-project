@@ -1,42 +1,41 @@
 const mongoose = require("mongoose");
 
-const staffSchema = new mongoose.Schema({
-  fullname: {
+const GroupSchema = new mongoose.Schema({
+  groupId: {
     type: String,
     required: true,
   },
-  email: {
+  groupLeader: {
     type: String,
     required: true,
   },
-  staffId: {
+  member1: {
     type: String,
     required: true,
   },
-  phone: {
+  member2: {
     type: String,
     required: true,
   },
-  password: {
+  member3: {
     type: String,
     required: true,
   },
-  gender: {
+  supervisor: {
     type: String,
     required: true,
   },
-  address: {
+  coSupervisor: {
     type: String,
     required: true,
   },
-  role: {
+  panelMember: {
     type: String,
-    required: true,
   },
-  assignedGroup: {
+  status: {
     type: String,
   },
 });
 
-const staff = mongoose.model("Staffs", staffSchema);
-module.exports = staff;
+const group = mongoose.model("Groups", GroupSchema);
+module.exports = group;
