@@ -1,7 +1,12 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb, Space } from 'antd';
 const { Header, Content, Footer} = Layout;
 import { Link, useLocation } from 'react-router-dom';
+import { createFromIconfontCN } from '@ant-design/icons';
+const IconFont = createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
+});
+
 
 export const StudentHeader = (props) => {
   const location = useLocation();
@@ -37,13 +42,24 @@ export const StudentHeader = (props) => {
           </div>
         </Content>
 
-        {/* <Footer
+        <Footer
       style={{
-        textAlign: 'center',
+        //marginTop:'100px',
+        height:'100px',
       }}
     >
-      Research Project Management Tool ©2022 Created by Ant UED
-    </Footer> */}
+      <div>
+      
+       
+       
+     <h3 style={{textAlign:'center'}}>Research Project Management Tool ©2022 Created by Ant UED</h3>
+    
+    
+      </div>
+      
+     
+    </Footer>
+    
       </Layout>
     </>
   );
@@ -73,6 +89,9 @@ export const StaffHeader = (props) => {
             </Menu.Item>
             <Menu.Item key={['/topicEvaluation']}>
               <Link to={'/topicEvaluation'}>Topic Evaluation</Link>
+            </Menu.Item>
+            <Menu.Item key={['/requestAccept']}>
+              <Link to={'/'}>Students Requests</Link>
             </Menu.Item>
           </Menu>
         </Header>
