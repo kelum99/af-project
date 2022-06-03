@@ -1,0 +1,81 @@
+.formP{
+    margin-right: 400px;
+    background: #BABABA;
+    border: 20px solid #f5f3f3;
+    border-radius: 50px;
+    border-left: -100px;
+    margin-top: 80px;
+    
+    flex-direction: column;
+    justify-content: space-around;
+    
+    max-width: 1200px;
+
+    margin-left:420px;
+    max-height:max-content;
+}
+
+.btnsubmit{
+    margin-right: 330px;
+    float:right;
+}
+
+.checkR{
+    margin-right: 300px;
+    float:right;
+}
+
+ /* form{
+    background: rgb(231, 178, 178);
+    border: 20px solid #f5f3f3;
+    border-radius: 50px;
+    border-left: -100px;
+    
+    flex-direction: column;
+    justify-content: space-around;
+    
+    max-width: 1200px;
+
+    margin-left: 400px;
+    max-height: 2000px;  */
+    
+
+    /* width: 80%;
+    background-color: transparent;
+    padding: 20px;
+    margin: 0 auto;
+    display: grid;
+    max-width: 900px;
+    background: rgba(23, 126, 129, 0.5);
+    background-size: cover; 
+    
+} */
+
+label {
+    color: #980b0b;
+    display: block;
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: center;
+    margin-left: 30px;
+  }
+  
+  /* .regcomponents{
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
+    
+        background-color: #11105e;
+        background-size: cover; 
+    
+} 
+
+.lableitem{
+    font-weight: bold;
+} */
+
+/* .regCard{
+    width: 500px;
+    padding: 25px;
+} */
