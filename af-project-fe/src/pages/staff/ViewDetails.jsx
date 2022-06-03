@@ -1,5 +1,6 @@
 import React from "react";
 import { Table, Space } from "antd";
+import { StaffHeader } from "../../components/Headers";
 
 const { Column, ColumnGroup } = Table;
 const data = [
@@ -30,19 +31,19 @@ const ViewDetails = () => {
         }
       };
 
-      const getStaff = async () => {
-        try {
-          const res = await request.get('staff');
-          if (res.status === 200) {
-            console.log('staff', res.data);
-            setStaff(res.data);
-          } else {
-            message.error('failed!');
-          }
-        } catch (err) {
-          console.log('err', err);
-        }
-      };
+    //   const getStaff = async () => {
+    //     try {
+    //       const res = await request.get('staff');
+    //       if (res.status === 200) {
+    //         console.log('staff', res.data);
+    //         setStaff(res.data);
+    //       } else {
+    //         message.error('failed!');
+    //       }
+    //     } catch (err) {
+    //       console.log('err', err);
+    //     }
+    //   };
 
     //   useEffect(() => {
     //     getUsergroup();
@@ -52,6 +53,7 @@ const ViewDetails = () => {
 
     return(
         <StaffHeader>
+           
         <Table dataSource={data}>
         <Column title="Group ID" dataIndex="groupid" key="groupid" />
         <Column title="Group Leader" dataIndex="groupLeader" key="groupLeader" />

@@ -6,6 +6,8 @@ import { createFromIconfontCN } from '@ant-design/icons';
 const IconFont = createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
 });
+import { StarOutlined, StarFilled, StarTwoTone, PhoneOutlined } from '@ant-design/icons';
+
 
 
 export const StudentHeader = (props) => {
@@ -17,9 +19,11 @@ export const StudentHeader = (props) => {
           style={{
             position: 'fixed',
             zIndex: 1,
-            width: '100%'
+            width: '100%',
+           
           }}>
           <Menu
+          
             theme="dark"
             mode="horizontal"
             selectedKeys={[location.pathname]}
@@ -45,16 +49,18 @@ export const StudentHeader = (props) => {
         <Footer
       style={{
         //marginTop:'100px',
-        height:'100px',
+        height:'50px',
       }}
     >
-      <div>
+      
       
        
        
      <h3 style={{textAlign:'center'}}>Research Project Management Tool ©2022 Created by Ant UED</h3>
-    
-    
+     
+       <h4>0112098378</h4>
+       <div>
+     <PhoneOutlined />
       </div>
       
      
@@ -79,6 +85,7 @@ export const StaffHeader = (props) => {
             width: '100%'
           }}>
           <Menu
+         
             theme="dark"
             mode="horizontal"
             selectedKeys={[location.pathname]}
@@ -91,7 +98,7 @@ export const StaffHeader = (props) => {
               <Link to={'/topicEvaluation'}>Topic Evaluation</Link>
             </Menu.Item>
             <Menu.Item key={['/requestAccept']}>
-              <Link to={'/'}>Students Requests</Link>
+              <Link to={'/requestAccept'}>Students Requests</Link>
             </Menu.Item>
           </Menu>
         </Header>
@@ -101,13 +108,13 @@ export const StaffHeader = (props) => {
           </div>
         </Content>
 
-        {/* <Footer
+        <Footer
       style={{
         textAlign: 'center',
       }}
     >
       Research Project Management Tool ©2022 Created by Ant UED
-    </Footer> */}
+    </Footer>
       </Layout>
     </>
   );

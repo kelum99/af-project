@@ -205,6 +205,7 @@ const getStaff = async () => {
           ]}>
           <Select placeholder="select your type">
             <Option value="Supervisor">Supervisor</Option>
+            <Option value="CoSupervisor">Co-Supervisor</Option>
             <Option value="Panel Member">Panel Member</Option>
           </Select>
         </Form.Item>
