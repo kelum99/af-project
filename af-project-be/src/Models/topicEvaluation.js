@@ -9,7 +9,7 @@ const topicEvaluation = new mongoose.Schema({
         type: String,
         required: true,
     },
-    researchDocs: {
+    description: {
         type: String,
         required: true,
     },
