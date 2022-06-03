@@ -3,7 +3,7 @@ const presentationEvaluationController = require("../controllers/presentation.co
 
 router.post("/", presentationEvaluationController.createpresentationEvaluation);
 
-router.get("/", presentationEvaluationController.getpresentationEvaluation);
+router.get("/:id", presentationEvaluationController.getpresentationEvaluation);
 
 router.get("/", presentationEvaluationController.getAllpresentationEvaluation);
 

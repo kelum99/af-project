@@ -1,40 +1,21 @@
-import React, { useState } from 'react';
-import { Table, Space, Button, Popconfirm, Checkbox, Modal, Form, Input } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Table, Space, Button, Popconfirm, Checkbox, Modal, Form, Input, message } from 'antd';
+import useRequest from '../../services/RequestContext';
 
-const dataSource = [
-  {
-    key: '1',
-    groupID: 'G001',
-    ResearchTopic: 32,
-    researchDocs: 'New York No. 1 Lake Park'
-  },
-  {
-    key: '2',
-    groupID: 'G002',
-    researchTopic: 32,
-    researchDocs: 'New York No. 1 Lake Park'
-  },
-  {
-    key: '3',
-    groupID: 'G003',
-    researchTopic: 32,
-    researchDocs: 'New York No. 1 Lake Park'
-  },
 
-  {
-    key: '4',
-    groupID: 'G004',
-    researchTopic: 32,
-    researchDocs: 'New York No. 1 Lake Park'
-  }
-];
+
 
 const TopicEvaluation = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  const [data, setData] = useState([]);
+  const [form] = Form.useForm();
+  const { request } = useRequest();
   const showModal = () => {
     setIsModalVisible(true);
   };
+
+  
+      
 
   const handleOk = () => {
     setIsModalVisible(false);
@@ -46,6 +27,43 @@ const TopicEvaluation = () => {
 
   const onFinish = values => {
     console.log('Success:', values);
+  };
+
+  const gettopicEvaluation = async () => {
+    try {
+      const res = await request.get('topicEvaluation');
+      if (res.status === 200) {
+        setData(res.data);
+      } else {
+        message.error('Data fetch failed!');
+      }
+    } catch (e) {
+      console.log('err', e);
+    }
+  };
+
+ 
+
+  const updatetopicEvaluation = async (values) => {
+    try {
+      const res = await request.put(`staff/${selected._id}`, values);
+      if (res.status === 200) {
+        message.success('Successfully Updated!');
+        setSelected(undefined);
+        handleCancel();
+        getStaff();
+      } else {
+        message.error('Failed!');
+      }
+    } catch (e) {
+      console.log('err', e);
+    }
+  };
+
+
+
+  const onReset = () => {
+    form.resetFields();
   };
 
   const layout = {
@@ -69,14 +87,25 @@ const TopicEvaluation = () => {
       key: 'researchTopic'
     },
     {
-      title: 'ResearchDocs',
-      dataIndex: 'researchDocs',
-      key: 'researchDocs'
+      title: 'Description',
+      dataIndex: 'description',
+      key: 'description'
+    },
+    {
+      title: 'Feedback',
+      dataIndex: 'feedback',
+      key: 'feedback'
+    },
+
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status'
     },
     {
       title: 'Action',
       key: 'action',
-      render: () => (
+      render: (text, record) => (
         <Space size="middle">
           <Button type="primary" onClick={showModal} style={{ marginBottom: 20 }}>
             Feedback
@@ -86,13 +115,21 @@ const TopicEvaluation = () => {
     }
   ];
 
+  useEffect(() => {
+    gettopicEvaluation();
+  }, []);
+
+
+ 
+
+
   return (
     <div className="MainContainer-Item">
-      <div className="form-item">
+ 
       <h2 style={{ color: '#fff' }}>User Management</h2>
-      <div>
+   
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <Table dataSource={dataSource} columns={columns} style={{ width: '80%', margin: 15 }} />
+        <Table dataSource={data} columns={columns} style={{ width: '80%', margin: 15 }} />
       </div>
       
       <Modal
@@ -103,22 +140,27 @@ const TopicEvaluation = () => {
         onOk={handleOk}
         onCancel={handleCancel}>
         <div>
-          <Form>
-          <Form.Item
-            label="Group ID"
-            name="groupid"
-            rules={[
-              {
-                required: true,
-                message: 'Please input  Group ID!'
-              }
-            ]}>
-            <Input />
-          </Form.Item>
-
+          <Form
+           autoComplete="off"
+           labelCol={{ span: 6 }}
+           wrapperCol={{ span: 20 }}
+           form={form}>
+         
             <Form.Item
               label="Feedback"
               name="feedback"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input  Feedback!'
+                }
+              ]}>
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Status"
+              name="status"
               rules={[
                 {
                   required: true,
@@ -135,24 +177,18 @@ const TopicEvaluation = () => {
               }}></Form.Item>
 
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 6 }}>
-              
+              <center>
                 <Button type="primary" htmlType="submit" style={{ marginRight: 70 }}>
-                  Accept
+                  Submit
                 </Button>
-                
-
-                <Button type="primary" htmlType="submit"  >
-                  Reject
-                </Button>
-                
-                
+                </center>
             </Form.Item>
           </Form>
+
+
         </div>
       </Modal>
     </div> 
-    </div>
-    </div>
   );
 };
 

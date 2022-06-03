@@ -3,7 +3,7 @@ const topicEvaluation = require("../controllers/topicEvaluation.controller");
 
 router.post("/", topicEvaluation.createtopicEvaluation);
 
-router.get("/", topicEvaluation.gettopicEvaluation);
+router.get("/:id", topicEvaluation.gettopicEvaluation);
 
 router.get("/", topicEvaluation.getAlltopicEvaluation);
 

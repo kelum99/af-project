@@ -36,6 +36,9 @@ app.use("/api/topicEvaluation", topicEvaluation);
 const presentationEvaluation = require("./src/Routes/presentationEvaluation.routes");
 app.use("/api/presentationEvaluation", presentationEvaluation);
 
+const TopicFeedback = require("./src/Routes/topicFeedback.routes");
+app.use("/api/topicFeedback", TopicFeedback);
+
 app.listen(4000, (err) => {
   if (!err) {
     console.log("successfully connected to the port ", 4000);
