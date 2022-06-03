@@ -24,12 +24,12 @@ function Registration() {
                 message.success("Successfully Registered!");
                 navigate("/login");
             } else {
-                message.success("Registration Failed. Try Again!");
+                message.success("Registration Failed, Try Again!");
                 form.resetFields();
             }
             } catch (e) {
-            console.log("error", e);
-            form.resetFields();
+                console.log("error", e);
+                form.resetFields();
         }
     };
 
@@ -87,7 +87,7 @@ function Registration() {
                     <Form.Item
                     className="lableText"
                     label="Registration Number"
-                    name="regNumber"
+                    name="studentId"
                     rules={[
                         {
                         required: true,
@@ -158,10 +158,10 @@ function Registration() {
                         }}
                         onChange={handleChange}
                     >
-                        <Option value="foc">Faculty of Computing</Option>
-                        <Option value="fob">Faculty of Business</Option>
-                        <Option value="foe">Faculty of Engineering</Option>
-                        <Option value="foh">Faculty of Humanities</Option>
+                        <Option value="Faculty of Computing">Faculty of Computing</Option>
+                        <Option value="Faculty of Business">Faculty of Business</Option>
+                        <Option value="Faculty of Engineering">Faculty of Engineering</Option>
+                        <Option value="Faculty of Humanities">Faculty of Humanities</Option>
                     </Select>
                     </Form.Item>
 

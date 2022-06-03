@@ -2,21 +2,19 @@ import { Button } from "antd";
 import React from "react";
 import './ComponentsStyles.css';
 import { navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const Home = () => {
-    let navigate = useNavigate();
-    function handleClick() {
-        navigate('/login/staff')
-    }
+    const navigate = useNavigate();
     return(
 <div>
 <center>
     <h1>Research Project Management</h1>
     </center>
-    <Button type="primary" htmlType="submit" className="staffBtn" onClick={handleClick}>STAFF</Button>
-    <Button type="primary" htmlType="submit" className="studentBtn">STUDENT</Button>
+    <Button type="primary" htmlType="submit" className="staffBtn" onClick={() => navigate('login/staff')}>STAFF</Button>
+    <Button type="primary" htmlType="submit" className="studentBtn" onClick={() => navigate('login/student')}>STUDENT</Button>
 </div>
 
 

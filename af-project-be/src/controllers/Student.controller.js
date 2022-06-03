@@ -52,3 +52,26 @@ exports.deleteStudent = async (req, res) => {
     res.status(500).send({ message: "error", data: e });
   }
 };
+
+exports.updateStudentGroup = async (req, res) => {
+  try {
+    const data = req.body;
+    if (data) {
+      const updateStudent = await Student.updateOne(
+        { studentId: req.params.studentId },
+        {
+          $set: {
+            groupId: data.groupId,
+          },
+        }
+      );
+      console.log("updated ", updateStudent);
+      res.status(200).send({ message: "success", data: updateStudent });
+    } else {
+      res.status(204).send({ message: "update data can not be empty!" });
+    }
+  } catch (e) {
+    console.log("error", e);
+    res.status(500).send({ message: "error", data: e });
+  }
+};

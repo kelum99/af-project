@@ -43,6 +43,7 @@ app.use("/api/presentationEvaluation", presentationEvaluation);
 
 const loginRoute = require("./src/Routes/login.routes");
 app.use("/api/login/staff", loginRoute);
+app.use("/api/login/student", loginRoute);
 
 app.listen(4000, (err) => {
   if (!err) {

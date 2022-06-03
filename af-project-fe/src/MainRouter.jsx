@@ -13,6 +13,8 @@ import Registration from './pages/Student/Registration';
 import TopicRegister from './pages/Students/topicRegister';
 import Group from './pages/Students/Group';
 import Home from './components/Home'
+import RequestAccept from './pages/staff/requestAccept';
+import ViewDetails from './pages/staff/ViewDetails';
 
 const MainRouter = () => {
   return (
@@ -32,6 +34,8 @@ const MainRouter = () => {
         <Route path="/topicregister" element={<TopicRegister />} />
         <Route path="/Group" element={<Group />} />
         <Route path="/Home" element={<Home />} />
+        <Route path="/requestAccept" element={<RequestAccept />} />
+        <Route path="/ViewDetails" element={<ViewDetails />} />
       </Routes>
     </>
   );
