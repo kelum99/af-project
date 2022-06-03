@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Input, Button, message, Select } from 'antd';
 import './Students.css';
 import useRequest from '../../services/RequestContext';
-import Headers from '../../components/Headers';
+import {StudentHeader} from '../../components/Headers';
 
 function Topicregister() {
   const { request } = useRequest();
@@ -14,6 +14,8 @@ function Topicregister() {
   };
 
   const onFinish = async (values) => {
+    values.status = 'Pending';
+    values.feedback = 'Not eveluate';
     console.log('values', values);
     onReset();
     try {
@@ -32,7 +34,7 @@ function Topicregister() {
   };
 
   return (
-    <Headers>
+    <StudentHeader>
       <div className="form-container1">
         <Form
           form={form}
@@ -86,15 +88,15 @@ function Topicregister() {
           </Form.Item>
 
           <Form.Item
-            label="Register Numbers"
-            name="registernumbers"
+            label="Description"
+            name="description"
             rules={[
               {
                 required: true,
-                message: 'Please input your register numbers!'
+                message: 'Please enter description!'
               }
             ]}>
-            <Input.TextArea showCount maxLength={50} />
+            <Input.TextArea showCount maxLength={500} />
           </Form.Item>
 
           <br />
@@ -105,7 +107,7 @@ function Topicregister() {
           </Form.Item>
         </Form>
       </div>
-    </Headers>
+    </StudentHeader>
   );
 }
 export default Topicregister;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Table, Menu,  Space, Form, Select, Option,Button } from 'antd';
+import { StaffHeader } from "../../components/Headers";
 
 function viewPresentation(){
 
@@ -60,6 +61,7 @@ function viewPresentation(){
        const { Option } = Select;
  
        return(
+         <StaffHeader>
         <>
             <div className = "MainContaner-display">
         
@@ -77,7 +79,8 @@ function viewPresentation(){
        ADD Marks
         </Button>
         
-        </>    
+        </>   
+        </StaffHeader> 
         ); 
         }
         

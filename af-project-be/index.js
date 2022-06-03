@@ -41,8 +41,12 @@ app.use("/api/topicEvaluation", topicEvaluation);
 const presentationEvaluation = require("./src/Routes/presentationEvaluation.routes");
 app.use("/api/presentationEvaluation", presentationEvaluation);
 
+const TopicFeedback = require("./src/Routes/topicFeedback.routes");
+app.use("/api/topicFeedback", TopicFeedback);
+
 const loginRoute = require("./src/Routes/login.routes");
 app.use("/api/login", loginRoute);
+
 
 app.listen(4000, (err) => {
   if (!err) {

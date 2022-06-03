@@ -63,3 +63,27 @@ exports.updateTopic = async (req, res) => {
     res.status(500).send({ message: "error", data: e });
   }
 };
+
+exports.updateTpopicFeedback = async (req, res) => {
+  try {
+    const data = req.body;
+    if (data) {
+      const updateStatus = await Topic.updateOne(
+        { groupid: req.params.groupId },
+        {
+          $set: {
+            status: data.status,
+            feedback: data.feedback,
+          },
+        }
+      );
+      console.log("updated ", updateStatus);
+      res.status(200).send({ message: "success", data: updateStatus });
+    } else {
+      res.status(204).send({ message: "update data can not be empty!" });
+    }
+  } catch (e) {
+    console.log("error", e);
+    res.status(500).send({ message: "error", data: e });
+  }
+};
