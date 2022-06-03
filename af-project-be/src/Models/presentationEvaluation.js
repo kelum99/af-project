@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const presentationEvluationSchema = new mongoose.Schema({
 
+    MarkingCriteria: {
+        type: String,
+        required: true,
+    },
     groupid: {
         type: String,
         required: true,

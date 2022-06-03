@@ -14,6 +14,8 @@ function Topicregister() {
   };
 
   const onFinish = async (values) => {
+    values.status = 'Pending';
+    values.feedback = 'Not eveluate';
     console.log('values', values);
     onReset();
     try {
@@ -86,15 +88,15 @@ function Topicregister() {
           </Form.Item>
 
           <Form.Item
-            label="Register Numbers"
-            name="registernumbers"
+            label="Description"
+            name="description"
             rules={[
               {
                 required: true,
-                message: 'Please input your register numbers!'
+                message: 'Please enter description!'
               }
             ]}>
-            <Input.TextArea showCount maxLength={50} />
+            <Input.TextArea showCount maxLength={500} />
           </Form.Item>
 
           <br />
