@@ -11,4 +11,6 @@ router.delete("/:id", topicController.deleteTopic);
 
 router.put("/:id", topicController.updateTopic);
 
+router.put("/feedback/:groupId", topicController.updateTpopicFeedback);
+
 module.exports = router;
