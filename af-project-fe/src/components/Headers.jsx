@@ -68,8 +68,8 @@ export const StaffHeader = (props) => {
             selectedKeys={[location.pathname]}
             defaultSelectedKeys={['/presentationEvaluation']}
             style={{ fontSize: 16, fontWeight: 'bold' }}>
-            <Menu.Item key={['/presentationEvaluation']}>
-              <Link to={'/presentationEvaluation'}>Presentation Evalution</Link>
+            <Menu.Item key={['/presentationEvalution']}>
+              <Link to={'/presentationEvalution'}>Presentation Evalution</Link>
             </Menu.Item>
             <Menu.Item key={['/topicEvaluation']}>
               <Link to={'/topicEvaluation'}>Topic Evaluation</Link>
