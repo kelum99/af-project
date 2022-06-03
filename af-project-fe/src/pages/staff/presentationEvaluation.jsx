@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Table, Space, Popconfirm, Form, Input, Modal, Button, message, Select } from 'antd';
+import { StaffHeader} from '../../components/Headers';
 
 const dataSource = [
   {
@@ -115,6 +116,7 @@ const PresentationEvalution = () => {
   ];
 
   return (
+    <StaffHeader>
     <div className="MainContainer-Item">
       <div className="form-item">
         <center>
@@ -207,7 +209,7 @@ const PresentationEvalution = () => {
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Table dataSource={dataSource} columns={columns} style={{ width: '80%', margin: 15 }} />
           </div>
-          <Modal>
+          <Modal
             title="Upadte" width={800}
             footer={null}
             visible={isModalVisible}
@@ -282,6 +284,7 @@ const PresentationEvalution = () => {
         </div>
       </div>
     </div>
+    </StaffHeader>
   );
 };
 

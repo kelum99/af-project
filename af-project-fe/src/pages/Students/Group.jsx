@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, message, Select, Descriptions } from 'antd';
 import './Students.css';
-import Headers from '../../components/Headers';
+import {StudentHeader} from '../../components/Headers';
 import useRequest from '../../services/RequestContext';
 import useUser from '../../services/UserContext';
 
@@ -116,7 +116,7 @@ function Group() {
   }, []);
 
   return (
-    <Headers>
+    <StudentHeader>
       {userGroup === undefined && (
         <div className="form-container2">
           <Form
@@ -253,7 +253,7 @@ function Group() {
             </Descriptions>
           </div>
         ))}
-    </Headers>
+    </StudentHeader>
   );
 }
 export default Group;

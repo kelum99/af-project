@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table, Space, Button } from 'antd';
+import { StafftHeader } from '../../components/Headers';
 
 const { Column, ColumnGroup } = Table;
 
@@ -22,6 +23,7 @@ const data = [
 
 const Accepettopics = () => {
   return (
+    <StafftHeader>
     <div>
       <Table dataSource={data}>
         <Column title="Group ID" dataIndex="groupid" key="groupid" />
@@ -39,6 +41,7 @@ const Accepettopics = () => {
         />
       </Table>
     </div>
+    </StafftHeader>
   );
 };
 

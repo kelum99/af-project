@@ -1,9 +1,9 @@
 import React from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
-const { Header, Content, Footer } = Layout;
+const { Header, Content, Footer} = Layout;
 import { Link, useLocation } from 'react-router-dom';
 
-const Headers = (props) => {
+export const StudentHeader = (props) => {
   const location = useLocation();
   return (
     <>
@@ -49,4 +49,51 @@ const Headers = (props) => {
   );
 };
 
-export default Headers;
+
+
+export const StaffHeader = (props) => {
+  const location = useLocation();
+  return (
+    <>
+      <Layout>
+        <Header
+          style={{
+            position: 'fixed',
+            zIndex: 1,
+            width: '100%'
+          }}>
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            selectedKeys={[location.pathname]}
+            defaultSelectedKeys={['/presentationEvaluation']}
+            style={{ fontSize: 16, fontWeight: 'bold' }}>
+            <Menu.Item key={['/presentationEvaluation']}>
+              <Link to={'/presentationEvaluation'}>Presentation Evalution</Link>
+            </Menu.Item>
+            <Menu.Item key={['/topicEvaluation']}>
+              <Link to={'/topicEvaluation'}>Topic Evaluation</Link>
+            </Menu.Item>
+          </Menu>
+        </Header>
+        <Content className="site-layout-background" style={{ padding: '0 24px 24px' }}>
+          <div className="content-container">
+            <div>{props.children}</div>
+          </div>
+        </Content>
+
+        {/* <Footer
+      style={{
+        textAlign: 'center',
+      }}
+    >
+      Research Project Management Tool ©2022 Created by Ant UED
+    </Footer> */}
+      </Layout>
+    </>
+  );
+};
+
+
+
+

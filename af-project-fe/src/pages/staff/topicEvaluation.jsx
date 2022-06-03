@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Table, Space, Button, Popconfirm, Checkbox, Modal, Form, Input } from 'antd';
+import { StaffHeader } from '../../components/Headers';
 
 const dataSource = [
   {
@@ -87,6 +88,7 @@ const TopicEvaluation = () => {
   ];
 
   return (
+    <StaffHeader>
     <div className="MainContainer-Item">
       <div className="form-item">
       <h2 style={{ color: '#fff' }}>User Management</h2>
@@ -153,6 +155,7 @@ const TopicEvaluation = () => {
     </div> 
     </div>
     </div>
+    </StaffHeader>
   );
 };
 
