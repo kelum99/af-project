@@ -1,206 +1,259 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Input, Button, message, Select } from 'antd';
+import { Form, Input, Button, message, Select, Descriptions } from 'antd';
 import './Students.css';
 import Headers from '../../components/Headers';
-import { getGroup } from '../../../../af-project-be/src/controllers/Group.controller';
-import { getgroups } from 'process';
 import useRequest from '../../services/RequestContext';
-
-
+import useUser from '../../services/UserContext';
 
 function Group() {
-const {request} = useRequest();
-const [form] = Form.useForm();
+  const { request } = useRequest();
+  const { user } = useUser();
+  const [form] = Form.useForm();
 
-const [isShow, setisShow] = useState(false);
-//const [groups, setGroups] = useState([]);
-const [savedData, setsavedData] = useState(null);
+  const [groups, setGroups] = useState([]);
+  const [userGroup, setUserGroup] = useState();
+  const [students, setStudents] = useState([]);
+  const [staff, setStaff] = useState([]);
 
-const onReset = () => {
-  console.log('onReset');
-  form.resetFields();
-};
+  const onReset = () => {
+    console.log('onReset');
+    form.resetFields();
+  };
 
   const onFinish = async (values) => {
-    try{
-      const res = await request.post("group", values);
-      if(res.status ===201) {
-        message.success("Group created request send!");
-        console.log("group", res);
+    try {
+      values.groupId = `GRP_${Math.floor(Math.random() * 2000) + 1}`;
+      values.status = 'Pendding';
+      values.panelMember = 'Not Set';
+      const res = await request.post('group', values);
+      if (res.status === 201) {
+        message.success('Group created request send!');
+        console.log('data', res.data);
+        await request.put(`student/group/${res.data.data.groupLeader}`, {
+          groupId: res.data.data.groupId
+        });
+        await request.put(`student/group/${res.data.data.member1}`, {
+          groupId: res.data.data.groupId
+        });
+        await request.put(`student/group/${res.data.data.member2}`, {
+          groupId: res.data.data.groupId
+        });
+        await request.put(`student/group/${res.data.data.member3}`, {
+          groupId: res.data.data.groupId
+        });
         onReset();
         getgroups();
-        setsavedData(res.data.data);
-        setisShow(true);
-        //setsavedData(null);
-      }else{
-        message.error("falied");
+      } else {
+        message.error('falied');
+        onReset();
       }
-    }catch (err){
-      console.log("err", err);
+    } catch (err) {
+      console.log('err', err);
     }
   };
 
- const getgroups = async () => {
-   try{
-     const res = await request.get("group");
-     if(res.status === 200) {
-       console.log("groups", res);
-     }else{
-       message.error("failed!");
-     }
-   } catch (err){
-     console.log("err", err);
-   }
- };
+  const getgroups = async () => {
+    try {
+      const res = await request.get('group');
+      if (res.status === 200) {
+        console.log('groups', res.data);
+        setGroups(res.data);
+      } else {
+        message.error('failed!');
+      }
+    } catch (err) {
+      console.log('err', err);
+    }
+  };
 
- useEffect(() => {
-   getgroups();
- }, []);
+  const getStudents = async () => {
+    try {
+      const res = await request.get('student');
+      if (res.status === 200) {
+        console.log('students', res.data);
+        setStudents(res.data);
+      } else {
+        message.error('failed!');
+      }
+    } catch (err) {
+      console.log('err', err);
+    }
+  };
+
+  const getStaff = async () => {
+    try {
+      const res = await request.get('staff');
+      if (res.status === 200) {
+        console.log('staff', res.data);
+        setStaff(res.data);
+      } else {
+        message.error('failed!');
+      }
+    } catch (err) {
+      console.log('err', err);
+    }
+  };
+
+  const getUsergroup = async () => {
+    try {
+      const res = await request.get(`group/${user.group}`);
+      if (res.status === 200) {
+        console.log('userGRR', res.data);
+        setUserGroup(res.data);
+      } else {
+        message.error('failed!');
+      }
+    } catch (err) {
+      console.log('err', err);
+    }
+  };
+
+  useEffect(() => {
+    getUsergroup();
+    getgroups();
+    getStaff();
+    getStudents();
+  }, []);
 
   return (
-    <React.Fragment>
     <Headers>
-      <div className="form-container2">
-        <Form 
-        form = {form}
-        layout="horizontal" 
-        labelCol={{ span: 10 }} 
-        wrapperCol={{ span: 8 }}
-        onFinish={onFinish}>
-          <h1>
-            <center>Group Registertion</center>
-          </h1>
-          <br />
+      {userGroup === undefined && (
+        <div className="form-container2">
+          <Form
+            form={form}
+            layout="horizontal"
+            labelCol={{ span: 10 }}
+            wrapperCol={{ span: 6 }}
+            onFinish={onFinish}>
+            <Form.Item wrapperCol={{ offset: 10, span: 10 }} style={{ margin: 20 }}>
+              <h1>Group Registertion</h1>
+            </Form.Item>
+            <Form.Item
+              label="Group Leader"
+              name="groupLeader"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter leader IT number'
+                }
+              ]}>
+              <Input />
+            </Form.Item>
 
-          <Form.Item
-            label="Group Leader"
-            name="groupLeader"
-            rules={[
-              {
-                required: true,
-                message: 'Please enter leader IT number'
-              }
-            ]}>
-            <Input />
-          </Form.Item>
+            <Form.Item
+              label="Member 1"
+              name="member1"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your IT number'
+                }
+              ]}>
+              <Select>
+                {students.map((student) => (
+                  <Select.Option value={student.studentId}>{student.studentId}</Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
 
-          <Form.Item
-            label="Member 1"
-            name="member1"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your IT number'
-              }
-            ]}>
-            <Select>
-              <Select.Option value="IT20204409">IT20204409</Select.Option>
-              <Select.Option value=""></Select.Option>
-              <Select.Option value=""></Select.Option>
-            </Select>
-          </Form.Item>
+            <Form.Item
+              label="Member 2"
+              name="member2"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your IT number'
+                }
+              ]}>
+              <Select>
+                {students.map((student) => (
+                  <Select.Option value={student.studentId}>{student.studentId}</Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
 
-          <Form.Item
-            label="Member 2"
-            name="member2"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your IT number'
-              }
-            ]}>
-            <Select>
-              <Select.Option value="IT20204407">IT20204407</Select.Option>
-              <Select.Option value=""></Select.Option>
-              <Select.Option value=""></Select.Option>
-            </Select>
-          </Form.Item>
+            <Form.Item
+              label="Member 3"
+              name="member3"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your IT number'
+                }
+              ]}>
+              <Select>
+                {students.map((student) => (
+                  <Select.Option value={student.studentId}>{student.studentId}</Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
 
-          <Form.Item
-            label="Member 3"
-            name="member3"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your IT number'
-              }
-            ]}>
-            <Select>
-              <Select.Option value="IT20204404">IT20204404</Select.Option>
-              <Select.Option value=""></Select.Option>
-              <Select.Option value=""></Select.Option>
-            </Select>
-          </Form.Item>
+            <Form.Item
+              label="Supervisor"
+              name="supervisor"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter supervisor name'
+                }
+              ]}>
+              <Select>
+                {staff &&
+                  staff
+                    .filter((val) => val.role === 'Supervisor')
+                    .map((val) => (
+                      <Select.Option value={val.fullname}>{val.fullname}</Select.Option>
+                    ))}
+              </Select>
+            </Form.Item>
 
-          <Form.Item
-            label="Supervisor"
-            name="supervisor"
-            rules={[
-              {
-                required: true,
-                message: 'Please enter supervisor name'
-              }
-            ]}>
-            <Select>
-              <Select.Option value="saman">saman</Select.Option>
-              <Select.Option value=""></Select.Option>
-              <Select.Option value=""></Select.Option>
-            </Select>
-          </Form.Item>
+            <Form.Item
+              label="Co-Supervisor"
+              name="coSupervisor"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter co-supervisor name'
+                }
+              ]}>
+              <Select>
+                {staff &&
+                  staff
+                    .filter((val) => val.role === 'Co-supervisor')
+                    .map((val) => (
+                      <Select.Option value={val.fullname}>{val.fullname}</Select.Option>
+                    ))}
+              </Select>
+            </Form.Item>
 
-          <Form.Item
-            label="Co-Supervisor"
-            name="cosupervisor"
-            rules={[
-              {
-                required: true,
-                message: 'Please enter co-supervisor name'
-              }
-            ]}>
-            <Select>
-              <Select.Option value="kumara">kumara</Select.Option>
-              <Select.Option value=""></Select.Option>
-              <Select.Option value=""></Select.Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit" className="btn3">
-              Create
-            </Button>
-          </Form.Item>
-        </Form>
-      </div>
-
+            <Form.Item wrapperCol={{ offset: 10, span: 8 }}>
+              <Button type="primary" htmlType="submit" className="btn3">
+                Create
+              </Button>
+            </Form.Item>
+          </Form>
+        </div>
+      )}
+      {userGroup &&
+        userGroup.map((value) => (
+          <div className="groupDetails">
+            <Descriptions
+              title={<h2>Group Information</h2>}
+              labelStyle={{ fontSize: 16, fontWeight: 'bold' }}
+              contentStyle={{ fontSize: 16 }}>
+              <Descriptions.Item label="Group ID">{value.groupId}</Descriptions.Item>
+              <Descriptions.Item label="Group Leader">{value.groupLeader}</Descriptions.Item>
+              <Descriptions.Item label="Member 1">{value.member1}</Descriptions.Item>
+              <Descriptions.Item label="Member 2">{value.member2}</Descriptions.Item>
+              <Descriptions.Item label="Member 3">{value.member3}</Descriptions.Item>
+              <Descriptions.Item label="Supervisor">{value.supervisor}</Descriptions.Item>
+              <Descriptions.Item label="Co-Supervisor">{value.coSupervisor}</Descriptions.Item>
+              <Descriptions.Item label="Panel Members">{value.panelMember}</Descriptions.Item>
+              <Descriptions.Item label="Status">{value.status}</Descriptions.Item>
+            </Descriptions>
+          </div>
+        ))}
     </Headers>
-
-{/* new */}
-
-{
-  isShow&&
-    <div>
-<label>Group Leader</label>
-<label>{savedData?.groupLeader}</label>
-
-<label>Member 1</label>
-<label>{savedData?.member1}</label>
-
-<label>Member 2</label>
-<label>{savedData?.member2}</label>
-
-<label>Member 3</label>
-<label>{savedData?.member3}</label>
-
-<label>Supervisor</label>
-<label>{savedData?.supervisor}</label>
-
-<label>Co-Supervisor</label>
-<label>{savedData?.cosupervisor}</label>
-
-    </div>
-    
-}
-    </React.Fragment>
   );
 }
 export default Group;
