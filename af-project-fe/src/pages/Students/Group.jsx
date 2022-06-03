@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, message, Select } from 'antd';
 import './Students.css';
-import Headers from '../../components/Headers';
+import {StudentHeader} from '../../components/Headers';
 import { getGroup } from '../../../../af-project-be/src/controllers/Group.controller';
 import { getgroups } from 'process';
 import useRequest from '../../services/RequestContext';
@@ -59,7 +59,7 @@ const onReset = () => {
 
   return (
     <React.Fragment>
-    <Headers>
+    <StudentHeader>
       <div className="form-container2">
         <Form 
         form = {form}
@@ -172,7 +172,7 @@ const onReset = () => {
         </Form>
       </div>
 
-    </Headers>
+    </StudentHeader>
 
 {/* new */}
 

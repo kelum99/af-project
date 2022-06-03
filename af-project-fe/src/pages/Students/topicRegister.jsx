@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Input, Button, message, Select } from 'antd';
 import './Students.css';
 import useRequest from '../../services/RequestContext';
-import Headers from '../../components/Headers';
+import {StudentHeader} from '../../components/Headers';
 
 function Topicregister() {
   const { request } = useRequest();
@@ -32,7 +32,7 @@ function Topicregister() {
   };
 
   return (
-    <Headers>
+    <StudentHeader>
       <div className="form-container1">
         <Form
           form={form}
@@ -105,7 +105,7 @@ function Topicregister() {
           </Form.Item>
         </Form>
       </div>
-    </Headers>
+    </StudentHeader>
   );
 }
 export default Topicregister;

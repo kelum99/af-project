@@ -4,20 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import useRequest from '../../services/RequestContext';
 import './RegStyles.css';
 import { async } from '@firebase/util';
+import { StaffHeader } from '../../components/Headers';
 //import { set } from 'mongoose';
 
-const prefixSelector = (
-  <Form.Item name="prefix" noStyle>
-    <Select
-      style={{
-        width: 70
-      }}>
-      <Option value="IT">IT</Option>
-      <Option value="BS">BS</Option>
-      <Option value="EN">EN</Option>
-    </Select>
-  </Form.Item>
-);
+
 
 function StaffReg() {
   const {request} = useRequest();
@@ -31,9 +21,11 @@ function StaffReg() {
   };
 
   const onFinish = async (values) => {
-    console.log('values',values);
-    onReset();
+    //console.log('values',values);
+    
+   
     try{
+      values.assignedGroup = "not set";
       const res = await request.post('staff', values);
       if (res.status === 201) {
         message.success('Successfully Registered !');
@@ -66,7 +58,9 @@ const getStaff = async () => {
 
 
   return (
+    <StaffHeader>
     <div className="formP">
+      <br/>
       <Form 
       form={form}
       layout="horizontal" 
@@ -75,7 +69,7 @@ const getStaff = async () => {
        onFinish={onFinish}>
         <h1>
           <center>Staff Registertion</center>{' '}
-        </h1>
+        </h1><br/>
 
         <Form.Item
           label="Full Name"
@@ -106,7 +100,7 @@ const getStaff = async () => {
         </Form.Item>
 
         <Form.Item
-          name="staffid"
+          name="staffId"
           label="Staff ID"
           rules={[
             {
@@ -114,12 +108,7 @@ const getStaff = async () => {
               message: 'Please input your phone number!'
             }
           ]}>
-          <Input
-            addonBefore={prefixSelector}
-            style={{
-              width: '100%'
-            }}
-          />
+          <Input/>
         </Form.Item>
 
         <Form.Item
@@ -206,7 +195,7 @@ const getStaff = async () => {
         </Form.Item>
 
         <Form.Item
-          name="typework"
+          name="role"
           label="Type of Work"
           rules={[
             {
@@ -215,20 +204,12 @@ const getStaff = async () => {
             }
           ]}>
           <Select placeholder="select your type">
-            <Option value="supervisor">Supervisor</Option>
-            <Option value="panel member">Panel Member</Option>
+            <Option value="Supervisor">Supervisor</Option>
+            <Option value="Panel Member">Panel Member</Option>
           </Select>
         </Form.Item>
 
-        <Form.Item
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{
-            offset: 8,
-            span: 16
-          }}>
-          <Checkbox className="checkR">Remember me</Checkbox>
-        </Form.Item>
+       
 
         <Form.Item
           wrapperCol={{
@@ -236,7 +217,7 @@ const getStaff = async () => {
             span: 16
           }}>
           <center>
-            {' '}
+            {/* {' '} */}
             <Button type="primary" htmlType="submit" className="btnsubmit">
               Submit
             </Button>
@@ -244,6 +225,7 @@ const getStaff = async () => {
         </Form.Item>
       </Form>
     </div>
+    </StaffHeader>
   );
 }
 
