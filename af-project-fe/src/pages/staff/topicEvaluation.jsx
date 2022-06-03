@@ -26,7 +26,7 @@ const TopicEvaluation = () => {
 
   const gettopicEvaluation = async () => {
     try {
-      const res = await request.get('topicEvaluation');
+      const res = await request.get('topic');
       if (res.status === 200) {
         setData(res.data);
       } else {
@@ -68,14 +68,14 @@ const TopicEvaluation = () => {
   const columns = [
     {
       title: 'GroupID',
-      dataIndex: 'groupID',
-      key: 'groupID',
+      dataIndex: 'groupid',
+      key: 'groupid',
       render: text => <a>{text}</a>
     },
     {
       title: 'ResearchTopic',
-      dataIndex: 'researchTopic',
-      key: 'researchTopic'
+      dataIndex: 'researchtopic',
+      key: 'researchtopic'
     },
     {
       title: 'Description',

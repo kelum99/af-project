@@ -1,23 +1,31 @@
 const mongoose = require("mongoose");
 
 const topicSchema = new mongoose.Schema({
-  facalty:{
+  facalty: {
     type: String,
-    required: true,
+    required: true
   },
-    groupid: {
+  groupid: {
     type: String,
-    required: true,
+    required: true
   },
   researchtopic: {
     type: String,
-    required: true,
+    required: true
   },
-  registernumbers: {
-    type: [{type:String}],
-    required: true,
+  description: {
+    type: String,
+    required: true
   },
- 
+  feedback: {
+    type: String
+  },
+  status: {
+    type: String
+  },
+  panelMember: {
+    type: String
+  }
 });
 
 const topic = mongoose.model("Topics", topicSchema);
