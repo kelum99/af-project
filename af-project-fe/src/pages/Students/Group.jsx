@@ -118,8 +118,9 @@ function Group() {
   return (
     <StudentHeader>
       {userGroup === undefined && (
-        <div className="form-container2">
+        <div className="form2">
           <Form
+            
             form={form}
             layout="horizontal"
             labelCol={{ span: 10 }}
