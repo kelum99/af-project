@@ -13,3 +13,13 @@ exports.addDocument = async (req, res) => {
         console.log("Error", e);
     }
 };
+
+exports.getAllDocuments = async (req, res) => {
+    try {
+        const doc = await DocumentSubmission.find({});
+        res.json(doc);
+    } catch (e) {
+    console.log("Error", e);
+    }
+};
+
