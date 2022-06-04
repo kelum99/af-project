@@ -40,9 +40,12 @@
   margin: 10px 45px;
   width: 300px;
 }
-
-
-
-.phone{
-    margin-bottom: 100px;
+.phone {
+  margin-bottom: 100px;
+}
+.content-container {
+  background-image: url('../public/background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 95vh;
 }
