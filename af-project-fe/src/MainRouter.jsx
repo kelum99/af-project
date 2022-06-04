@@ -40,6 +40,7 @@ const MainRouter = () => {
         <Route path="/requestAccept" element={<RequestAccept />} />
         <Route path="/ViewDetails" element={<ViewDetails />} />
         <Route path="/docevaluation" element={<DocumentEvaluation/>}/>
+
       </Routes>
     </>
   );

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, Card } from 'antd';
 import "./DocumentEvaluation.css";
+import { storage } from '../../services/Firebase';
 
 
 const columns = [
