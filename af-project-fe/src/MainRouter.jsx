@@ -39,7 +39,8 @@ const MainRouter = () => {
         <Route path="/" element={<Home />} />
         <Route path="/requestAccept" element={<RequestAccept />} />
         <Route path="/ViewDetails" element={<ViewDetails />} />
-        <Route path="/docevaluation" element={<DocumentEvaluation/>}></Route>
+        <Route path="/docevaluation" element={<DocumentEvaluation/>}/>
+
       </Routes>
     </>
   );

@@ -27,7 +27,7 @@ const DocumentEvaluation = () => {
     return(
         <div>
             <h1 className='header-text'>Document Evaluation</h1>
-            <Card class>
+            <Card>
                 <Table columns={columns} size="middle"/>
             </Card>
         </div>
