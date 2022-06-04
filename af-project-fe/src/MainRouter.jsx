@@ -16,6 +16,7 @@ import DocumentSubmission from './pages/Student/DocumentSubmission';
 import Home from './components/Home';
 import RequestAccept from './pages/staff/requestAccept';
 import ViewDetails from './pages/staff/ViewDetails';
+import DocumentEvaluation from './pages/staff/DocumentEvaluation';
 
 const MainRouter = () => {
   return (
@@ -38,6 +39,7 @@ const MainRouter = () => {
         <Route path="/" element={<Home />} />
         <Route path="/requestAccept" element={<RequestAccept />} />
         <Route path="/ViewDetails" element={<ViewDetails />} />
+        <Route path="/docevaluation" element={<DocumentEvaluation/>}></Route>
       </Routes>
     </>
   );
