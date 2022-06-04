@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './DocumentSubmission.css';
-import { Upload, message, Button, Space } from 'antd';
+import { Upload, message, Button, Space, Typography } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import { storage } from '../../services/Firebase';
 import useRequest from '../../services/RequestContext';
 import { Field } from 'rc-field-form';
 
 const DocumentSubmission = () => {
+    const { Text } = Typography;
     const { Dragger } = Upload;
     const [uploading, setUploading] = useState(false);
     const [fileUrl, setFileUrl] = useState(null);
@@ -71,6 +72,9 @@ const DocumentSubmission = () => {
                 </p>
                 <p className="ant-upload-text">Click or drag file to this area to upload</p>
             </Dragger>
+            <span>
+                <p>Please rename your file to (GROUP ID_TOPIC) before uploading.</p>
+            </span>
             <Space>
                 <Button
                     type="primary"
