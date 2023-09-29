@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@ant-design/icons": "4.0.0",
-    "@babel/core": "^7.17.9",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
+    "@babel/core": "^7.22.15",
+    "@babel/preset-env": "^7.22.15",
+    "@babel/preset-react": "^7.22.15",
     "antd": "^4.19.5",
     "axios": "^0.26.1",
     "babel-loader": "^8.2.5",
